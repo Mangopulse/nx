@@ -1,0 +1,686 @@
+[
+  {
+    "id": "ySHJJj0OPaU",
+    "type": "HEADING_ROW",
+    "name": "Heading row",
+    "html": "<div class=\"select-none relative group w-full outline-sky-500/20 hover:outline hover:z-10\" role=\"button\" tabindex=\"0\" aria-disabled=\"false\" aria-roledescription=\"sortable\" aria-describedby=\"DndDescribedBy-0\" style=\"transition: transform 200ms ease 0s;\"><div><table align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\" style=\"max-width: 600px; box-sizing: border-box; min-width: 600px; width: 600px; background-color: rgb(255, 255, 255); padding: 20px; border-radius: 10px; border: 1px solid rgba(0, 0, 0, 0.133); border-collapse: separate; background-repeat: no-repeat; background-size: cover; background-image: url(&quot;&quot;); margin-block: 0px;\"><tr style=\"width: 100%;\"><td><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\"><tbody><tr><td><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><td><div class=\"relative\"><h1 style=\"font-size: 30px; font-weight: 800; text-align: center; margin-bottom: 0px; margin-top: 0px; color: rgb(0, 0, 0);\"><span nx=\"true\" spellcheck=\"false\" class=\"cursor-text\">أهلا بك في النشرة البريدية</span></h1></div><div class=\"relative\"><p style=\"font-size: 16px; line-height: 24px; margin: 0px; text-align: center; font-weight: 400; color: rgb(168, 168, 168);\"><span nx=\"true\" spellcheck=\"false\" class=\"cursor-text\">تابعنا دائما ليصلك كل جديد و مثير</span></p></div></td></tr></tbody></table></td></tr></tbody></table></td></tr></table></div></div>",
+    "extra": {},
+    "components": [
+      {
+        "id": "9dIvcE4LrCW",
+        "key": "MainHeading",
+        "type": "HEADING",
+        "name": "Heading",
+        "properties": [
+          {
+            "type": "TEXT_ALIGN",
+            "value": "center",
+            "name": "Text Alignment",
+            "cssName": "textAlign",
+            "dataType": "custom"
+          },
+          {
+            "type": "FONT_SIZE",
+            "value": 30,
+            "name": "Font Size",
+            "cssName": "fontSize",
+            "unit": "px",
+            "dataType": "number"
+          },
+          {
+            "type": "FONT_WEIGHT",
+            "value": 800,
+            "name": "Font Weight",
+            "cssName": "fontWeight",
+            "dataType": "number"
+          },
+          {
+            "type": "COLOR",
+            "value": "#000000",
+            "name": "Text Color",
+            "cssName": "color",
+            "dataType": "color"
+          }
+        ],
+        "defaultValue": "This is a heading",
+        "value": "أهلا بك في النشرة البريدية"
+      },
+      {
+        "id": "QqfxnJofQ6N",
+        "key": "Description",
+        "type": "DESCRIPTION",
+        "name": "Description",
+        "properties": [
+          {
+            "type": "TEXT_ALIGN",
+            "value": "center",
+            "name": "Text Alignment",
+            "cssName": "textAlign",
+            "dataType": "custom"
+          },
+          {
+            "type": "FONT_SIZE",
+            "value": 16,
+            "name": "Font Size",
+            "cssName": "fontSize",
+            "unit": "px",
+            "dataType": "number"
+          },
+          {
+            "type": "FONT_WEIGHT",
+            "value": 400,
+            "name": "Font Weight",
+            "cssName": "fontWeight",
+            "dataType": "number"
+          },
+          {
+            "type": "COLOR",
+            "value": "#a8a8a8",
+            "name": "Text Color",
+            "cssName": "color",
+            "dataType": "color"
+          }
+        ],
+        "defaultValue": "This is the heading description, you can keep it or remove it!",
+        "value": "تابعنا دائما ليصلك كل جديد و مثير"
+      }
+    ],
+    "properties": [
+      {
+        "type": "PADDING",
+        "value": {
+          "inline": 20,
+          "block": 20
+        },
+        "name": "Padding",
+        "dataType": "custom"
+      },
+      {
+        "type": "BORDER_RADIUS",
+        "value": 10,
+        "name": "Rounding",
+        "cssName": "borderRadius",
+        "unit": "px",
+        "dataType": "number"
+      },
+      {
+        "type": "BACKGROUND_COLOR",
+        "value": "#FFFFFF",
+        "name": "Background Color",
+        "cssName": "backgroundColor",
+        "dataType": "color"
+      },
+      {
+        "type": "BACKGROUND_IMAGE",
+        "value": "",
+        "name": "Background Image",
+        "cssName": "backgroundImage",
+        "dataType": "url"
+      },
+      {
+        "type": "MARGIN_VERTICAL",
+        "value": 0,
+        "name": "Vertical Spacing",
+        "cssName": "marginBlock",
+        "unit": "px",
+        "dataType": "number"
+      }
+    ]
+  },
+  {
+    "id": "jHngkWCJ4Vc",
+    "type": "HEADING_ROW",
+    "name": "Heading row",
+    "html": "<div class=\"select-none relative group w-full outline-sky-500/20 hover:outline hover:z-10\" role=\"button\" tabindex=\"0\" aria-disabled=\"false\" aria-roledescription=\"sortable\" aria-describedby=\"DndDescribedBy-0\" style=\"transition: transform 200ms ease 0s;\"><div><table align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\" style=\"max-width: 600px; box-sizing: border-box; min-width: 600px; width: 600px; background-color: rgb(255, 255, 255); padding: 10px 20px; border-radius: 10px; border: 1px solid rgba(0, 0, 0, 0.133); border-collapse: separate; background-repeat: no-repeat; background-size: cover; background-image: url(&quot;&quot;); margin-block: 0px;\"><tr style=\"width: 100%;\"><td><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\"><tbody><tr><td><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><td><div class=\"relative\"><h1 style=\"font-size: 20px; font-weight: 800; text-align: right; margin-bottom: 0px; margin-top: 0px; color: rgb(0, 0, 0);\"><span nx=\"true\" spellcheck=\"false\" class=\"cursor-text\">اخترنا لك ✨</span></h1></div><div class=\"relative\"></div></td></tr></tbody></table></td></tr></tbody></table></td></tr></table></div></div>",
+    "extra": {},
+    "components": [
+      {
+        "id": "_6Q5EmufM9L",
+        "key": "MainHeading",
+        "type": "HEADING",
+        "name": "Heading",
+        "properties": [
+          {
+            "type": "TEXT_ALIGN",
+            "value": "right",
+            "name": "Text Alignment",
+            "cssName": "textAlign",
+            "dataType": "custom"
+          },
+          {
+            "type": "FONT_SIZE",
+            "value": "20",
+            "name": "Font Size",
+            "cssName": "fontSize",
+            "unit": "px",
+            "dataType": "number"
+          },
+          {
+            "type": "FONT_WEIGHT",
+            "value": 800,
+            "name": "Font Weight",
+            "cssName": "fontWeight",
+            "dataType": "number"
+          },
+          {
+            "type": "COLOR",
+            "value": "#000000",
+            "name": "Text Color",
+            "cssName": "color",
+            "dataType": "color"
+          }
+        ],
+        "defaultValue": "This is a heading",
+        "value": "اخترنا لك ✨"
+      },
+      {
+        "id": "emt4tP3qIPT",
+        "key": "Description",
+        "type": "DESCRIPTION",
+        "name": "Description",
+        "properties": [
+          {
+            "type": "TEXT_ALIGN",
+            "value": "center",
+            "name": "Text Alignment",
+            "cssName": "textAlign",
+            "dataType": "custom"
+          },
+          {
+            "type": "FONT_SIZE",
+            "value": 16,
+            "name": "Font Size",
+            "cssName": "fontSize",
+            "unit": "px",
+            "dataType": "number"
+          },
+          {
+            "type": "FONT_WEIGHT",
+            "value": 400,
+            "name": "Font Weight",
+            "cssName": "fontWeight",
+            "dataType": "number"
+          },
+          {
+            "type": "COLOR",
+            "value": "#a8a8a8",
+            "name": "Text Color",
+            "cssName": "color",
+            "dataType": "color"
+          }
+        ],
+        "defaultValue": "This is the heading description, you can keep it or remove it!",
+        "value": "This is the heading description, you can keep it or remove it!",
+        "hidden": true
+      }
+    ],
+    "properties": [
+      {
+        "type": "PADDING",
+        "value": {
+          "inline": "20",
+          "block": "10"
+        },
+        "name": "Padding",
+        "dataType": "custom"
+      },
+      {
+        "type": "BORDER_RADIUS",
+        "value": 10,
+        "name": "Rounding",
+        "cssName": "borderRadius",
+        "unit": "px",
+        "dataType": "number"
+      },
+      {
+        "type": "BACKGROUND_COLOR",
+        "value": "#FFFFFF",
+        "name": "Background Color",
+        "cssName": "backgroundColor",
+        "dataType": "color"
+      },
+      {
+        "type": "BACKGROUND_IMAGE",
+        "value": "",
+        "name": "Background Image",
+        "cssName": "backgroundImage",
+        "dataType": "url"
+      },
+      {
+        "type": "MARGIN_VERTICAL",
+        "value": 0,
+        "name": "Vertical Spacing",
+        "cssName": "marginBlock",
+        "unit": "px",
+        "dataType": "number"
+      }
+    ]
+  },
+  {
+    "id": "HCPuOy3NKyB",
+    "type": "BASIC_WIDGET",
+    "name": "News Recommendation",
+    "html": "<div class=\"select-none relative group w-full outline-sky-500/20 hover:outline hover:z-10\" role=\"button\" tabindex=\"0\" aria-disabled=\"false\" aria-roledescription=\"sortable\" aria-describedby=\"DndDescribedBy-0\" style=\"transition: transform 200ms ease 0s;\"><div><table align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\" style=\"max-width: 600px; box-sizing: border-box; min-width: 600px; width: 600px; background-color: rgb(255, 255, 255); padding: 20px; border-radius: 10px; border: 1px solid rgba(0, 0, 0, 0.133); border-collapse: separate; background-repeat: no-repeat; background-size: cover; direction: rtl; background-image: url(&quot;&quot;); margin-block: 0px;\"><tr style=\"width: 100%;\"><td><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\"><tbody><tr><td><div class=\"relative\"><a href=\"@@URL-1@@\" target=\"_blank\" style=\"color: inherit; text-decoration: none; line-height: 100%; display: inline-block; max-width: 100%; padding: 0px;\"><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%;mso-text-raise:0\" hidden>&nbsp;</i><![endif]--></span><span style=\"color: inherit; text-decoration: none; max-width: 100%; display: inline-block; line-height: 120%; text-transform: none;\"><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><td style=\"width: 40%;\"><img src=\"@@IMAGE-1@@\" width=\"240\" height=\"150\" style=\"display: block; outline: none; border: none; text-decoration: none; border-radius: 6px;\"></td><td style=\"width: 60%;\"><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><p style=\"font-size: 19px; line-height: 2rem; margin: 0px 20px 10px; font-weight: bold;\">@@TITLE-1@@</p></tr></tbody></table><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><a nx=\"true\" target=\"_blank\" style=\"font-size: 14px; margin: 0px 20px; padding: 0px; border-radius: 5px; background-color: rgb(13, 19, 73); color: rgb(255, 255, 255); width: fit-content; line-height: 100%; text-decoration: none; display: inline-block; max-width: 100%;\"><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%;mso-text-raise:0\" hidden>&nbsp;</i><![endif]--></span><span style=\"font-size: 14px; margin: 0px 20px; padding: 8px 14px; border-radius: 5px; background-color: rgb(13, 19, 73); color: rgb(255, 255, 255); width: fit-content; max-width: 100%; display: inline-block; line-height: 120%; text-decoration: none; text-transform: none;\">اقرا المزيد</span><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%\" hidden>&nbsp;</i><![endif]--></span></a></tr></tbody></table></td></tr></tbody></table></span><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%\" hidden>&nbsp;</i><![endif]--></span></a></div><br><div class=\"relative\"><a href=\"@@URL-2@@\" target=\"_blank\" style=\"color: inherit; text-decoration: none; line-height: 100%; display: inline-block; max-width: 100%; padding: 0px;\"><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%;mso-text-raise:0\" hidden>&nbsp;</i><![endif]--></span><span style=\"color: inherit; text-decoration: none; max-width: 100%; display: inline-block; line-height: 120%; text-transform: none;\"><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><td style=\"width: 40%;\"><img src=\"@@IMAGE-2@@\" width=\"240\" height=\"150\" style=\"display: block; outline: none; border: none; text-decoration: none; border-radius: 6px;\"></td><td style=\"width: 60%;\"><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><p style=\"font-size: 19px; line-height: 2rem; margin: 0px 20px 10px; font-weight: bold;\">@@TITLE-2@@</p></tr></tbody></table><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><a nx=\"true\" target=\"_blank\" style=\"font-size: 14px; margin: 0px 20px; padding: 0px; border-radius: 5px; background-color: rgb(13, 19, 73); color: rgb(255, 255, 255); width: fit-content; line-height: 100%; text-decoration: none; display: inline-block; max-width: 100%;\"><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%;mso-text-raise:0\" hidden>&nbsp;</i><![endif]--></span><span style=\"font-size: 14px; margin: 0px 20px; padding: 8px 14px; border-radius: 5px; background-color: rgb(13, 19, 73); color: rgb(255, 255, 255); width: fit-content; max-width: 100%; display: inline-block; line-height: 120%; text-decoration: none; text-transform: none;\">اقرا المزيد</span><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%\" hidden>&nbsp;</i><![endif]--></span></a></tr></tbody></table></td></tr></tbody></table></span><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%\" hidden>&nbsp;</i><![endif]--></span></a></div><br><div class=\"relative\"><a href=\"@@URL-3@@\" target=\"_blank\" style=\"color: inherit; text-decoration: none; line-height: 100%; display: inline-block; max-width: 100%; padding: 0px;\"><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%;mso-text-raise:0\" hidden>&nbsp;</i><![endif]--></span><span style=\"color: inherit; text-decoration: none; max-width: 100%; display: inline-block; line-height: 120%; text-transform: none;\"><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><td style=\"width: 40%;\"><img src=\"@@IMAGE-3@@\" width=\"240\" height=\"150\" style=\"display: block; outline: none; border: none; text-decoration: none; border-radius: 6px;\"></td><td style=\"width: 60%;\"><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><p style=\"font-size: 19px; line-height: 2rem; margin: 0px 20px 10px; font-weight: bold;\">@@TITLE-3@@</p></tr></tbody></table><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><a nx=\"true\" target=\"_blank\" style=\"font-size: 14px; margin: 0px 20px; padding: 0px; border-radius: 5px; background-color: rgb(13, 19, 73); color: rgb(255, 255, 255); width: fit-content; line-height: 100%; text-decoration: none; display: inline-block; max-width: 100%;\"><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%;mso-text-raise:0\" hidden>&nbsp;</i><![endif]--></span><span style=\"font-size: 14px; margin: 0px 20px; padding: 8px 14px; border-radius: 5px; background-color: rgb(13, 19, 73); color: rgb(255, 255, 255); width: fit-content; max-width: 100%; display: inline-block; line-height: 120%; text-decoration: none; text-transform: none;\">اقرا المزيد</span><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%\" hidden>&nbsp;</i><![endif]--></span></a></tr></tbody></table></td></tr></tbody></table></span><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%\" hidden>&nbsp;</i><![endif]--></span></a></div><br><div class=\"relative\"><a href=\"@@URL-4@@\" target=\"_blank\" style=\"color: inherit; text-decoration: none; line-height: 100%; display: inline-block; max-width: 100%; padding: 0px;\"><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%;mso-text-raise:0\" hidden>&nbsp;</i><![endif]--></span><span style=\"color: inherit; text-decoration: none; max-width: 100%; display: inline-block; line-height: 120%; text-transform: none;\"><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><td style=\"width: 40%;\"><img src=\"@@IMAGE-4@@\" width=\"240\" height=\"150\" style=\"display: block; outline: none; border: none; text-decoration: none; border-radius: 6px;\"></td><td style=\"width: 60%;\"><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><p style=\"font-size: 19px; line-height: 2rem; margin: 0px 20px 10px; font-weight: bold;\">@@TITLE-4@@</p></tr></tbody></table><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><a nx=\"true\" target=\"_blank\" style=\"font-size: 14px; margin: 0px 20px; padding: 0px; border-radius: 5px; background-color: rgb(13, 19, 73); color: rgb(255, 255, 255); width: fit-content; line-height: 100%; text-decoration: none; display: inline-block; max-width: 100%;\"><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%;mso-text-raise:0\" hidden>&nbsp;</i><![endif]--></span><span style=\"font-size: 14px; margin: 0px 20px; padding: 8px 14px; border-radius: 5px; background-color: rgb(13, 19, 73); color: rgb(255, 255, 255); width: fit-content; max-width: 100%; display: inline-block; line-height: 120%; text-decoration: none; text-transform: none;\">اقرا المزيد</span><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%\" hidden>&nbsp;</i><![endif]--></span></a></tr></tbody></table></td></tr></tbody></table></span><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%\" hidden>&nbsp;</i><![endif]--></span></a></div><br><div class=\"relative\"><a href=\"@@URL-5@@\" target=\"_blank\" style=\"color: inherit; text-decoration: none; line-height: 100%; display: inline-block; max-width: 100%; padding: 0px;\"><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%;mso-text-raise:0\" hidden>&nbsp;</i><![endif]--></span><span style=\"color: inherit; text-decoration: none; max-width: 100%; display: inline-block; line-height: 120%; text-transform: none;\"><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><td style=\"width: 40%;\"><img src=\"@@IMAGE-5@@\" width=\"240\" height=\"150\" style=\"display: block; outline: none; border: none; text-decoration: none; border-radius: 6px;\"></td><td style=\"width: 60%;\"><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><p style=\"font-size: 19px; line-height: 2rem; margin: 0px 20px 10px; font-weight: bold;\">@@TITLE-5@@</p></tr></tbody></table><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><a nx=\"true\" target=\"_blank\" style=\"font-size: 14px; margin: 0px 20px; padding: 0px; border-radius: 5px; background-color: rgb(13, 19, 73); color: rgb(255, 255, 255); width: fit-content; line-height: 100%; text-decoration: none; display: inline-block; max-width: 100%;\"><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%;mso-text-raise:0\" hidden>&nbsp;</i><![endif]--></span><span style=\"font-size: 14px; margin: 0px 20px; padding: 8px 14px; border-radius: 5px; background-color: rgb(13, 19, 73); color: rgb(255, 255, 255); width: fit-content; max-width: 100%; display: inline-block; line-height: 120%; text-decoration: none; text-transform: none;\">اقرا المزيد</span><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%\" hidden>&nbsp;</i><![endif]--></span></a></tr></tbody></table></td></tr></tbody></table></span><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%\" hidden>&nbsp;</i><![endif]--></span></a></div></td></tr></tbody></table></td></tr></table></div></div>",
+    "extra": {
+      "imageSize": {
+        "width": 240,
+        "height": 150
+      },
+      "postsCount": 5,
+      "logic": "CONTENT_WIDGET"
+    },
+    "components": [
+      {
+        "id": "xXUHe8pXJx9",
+        "key": "ArticleRow",
+        "type": "ARTICLE_ROW",
+        "name": "Article Row",
+        "value": {
+          "readMoreBtn": "اقرا المزيد"
+        }
+      }
+    ],
+    "properties": [
+      {
+        "type": "RECOMMENDATION_LOGIC",
+        "value": "CONTENT_WIDGET",
+        "name": "News Recommendation Logic",
+        "dataType": "dropdown",
+        "dropdownItems": [
+          {
+            "label": "Trending News",
+            "value": "TRENDING_WIDGET"
+          },
+          {
+            "label": "Personalized News",
+            "value": "CONTENT_WIDGET"
+          }
+        ]
+      },
+      {
+        "type": "ARTICLES_COUNT",
+        "value": "5",
+        "name": "Artilcles Count",
+        "dataType": "number"
+      },
+      {
+        "type": "DIRECTION",
+        "value": "rtl",
+        "name": "Direction",
+        "cssName": "direction",
+        "dataType": "custom"
+      },
+      {
+        "type": "PADDING",
+        "value": {
+          "inline": 20,
+          "block": 20
+        },
+        "name": "Padding",
+        "dataType": "custom"
+      },
+      {
+        "type": "BORDER_RADIUS",
+        "value": 10,
+        "name": "Rounding",
+        "cssName": "borderRadius",
+        "unit": "px",
+        "dataType": "number"
+      },
+      {
+        "type": "BACKGROUND_COLOR",
+        "value": "#FFFFFF",
+        "name": "Background Color",
+        "cssName": "backgroundColor",
+        "dataType": "color"
+      },
+      {
+        "type": "BACKGROUND_IMAGE",
+        "value": "",
+        "name": "Background Image",
+        "cssName": "backgroundImage",
+        "dataType": "url"
+      },
+      {
+        "type": "MARGIN_VERTICAL",
+        "value": 0,
+        "name": "Vertical Spacing",
+        "cssName": "marginBlock",
+        "unit": "px",
+        "dataType": "number"
+      }
+    ]
+  },
+  {
+    "id": "e82FBRBolNd",
+    "type": "HEADING_ROW",
+    "name": "Heading row",
+    "html": "<div class=\"select-none relative group w-full outline-sky-500/20 hover:outline hover:z-10\" role=\"button\" tabindex=\"0\" aria-disabled=\"false\" aria-roledescription=\"sortable\" aria-describedby=\"DndDescribedBy-0\" style=\"transition: transform 200ms ease 0s;\"><div><table align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\" style=\"max-width: 600px; box-sizing: border-box; min-width: 600px; width: 600px; background-color: rgb(255, 255, 255); padding: 10px 20px; border-radius: 10px; border: 1px solid rgba(0, 0, 0, 0.133); border-collapse: separate; background-repeat: no-repeat; background-size: cover; background-image: url(&quot;&quot;); margin-block: 0px;\"><tr style=\"width: 100%;\"><td><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\"><tbody><tr><td><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><td><div class=\"relative\"><h1 style=\"font-size: 20px; font-weight: 800; text-align: right; margin-bottom: 0px; margin-top: 0px; color: rgb(0, 0, 0);\"><span nx=\"true\" spellcheck=\"false\" class=\"cursor-text\">رائج الان 🔥</span></h1></div><div class=\"relative\"></div></td></tr></tbody></table></td></tr></tbody></table></td></tr></table></div></div>",
+    "extra": {},
+    "components": [
+      {
+        "id": "_LKfeyNAlEM",
+        "key": "MainHeading",
+        "type": "HEADING",
+        "name": "Heading",
+        "properties": [
+          {
+            "type": "TEXT_ALIGN",
+            "value": "right",
+            "name": "Text Alignment",
+            "cssName": "textAlign",
+            "dataType": "custom"
+          },
+          {
+            "type": "FONT_SIZE",
+            "value": "20",
+            "name": "Font Size",
+            "cssName": "fontSize",
+            "unit": "px",
+            "dataType": "number"
+          },
+          {
+            "type": "FONT_WEIGHT",
+            "value": 800,
+            "name": "Font Weight",
+            "cssName": "fontWeight",
+            "dataType": "number"
+          },
+          {
+            "type": "COLOR",
+            "value": "#000000",
+            "name": "Text Color",
+            "cssName": "color",
+            "dataType": "color"
+          }
+        ],
+        "defaultValue": "This is a heading",
+        "value": "رائج الان 🔥"
+      },
+      {
+        "id": "92rzZvdPrnT",
+        "key": "Description",
+        "type": "DESCRIPTION",
+        "name": "Description",
+        "properties": [
+          {
+            "type": "TEXT_ALIGN",
+            "value": "center",
+            "name": "Text Alignment",
+            "cssName": "textAlign",
+            "dataType": "custom"
+          },
+          {
+            "type": "FONT_SIZE",
+            "value": 16,
+            "name": "Font Size",
+            "cssName": "fontSize",
+            "unit": "px",
+            "dataType": "number"
+          },
+          {
+            "type": "FONT_WEIGHT",
+            "value": 400,
+            "name": "Font Weight",
+            "cssName": "fontWeight",
+            "dataType": "number"
+          },
+          {
+            "type": "COLOR",
+            "value": "#a8a8a8",
+            "name": "Text Color",
+            "cssName": "color",
+            "dataType": "color"
+          }
+        ],
+        "defaultValue": "This is the heading description, you can keep it or remove it!",
+        "value": "This is the heading description, you can keep it or remove it!",
+        "hidden": true
+      }
+    ],
+    "properties": [
+      {
+        "type": "PADDING",
+        "value": {
+          "inline": 20,
+          "block": "10"
+        },
+        "name": "Padding",
+        "dataType": "custom"
+      },
+      {
+        "type": "BORDER_RADIUS",
+        "value": 10,
+        "name": "Rounding",
+        "cssName": "borderRadius",
+        "unit": "px",
+        "dataType": "number"
+      },
+      {
+        "type": "BACKGROUND_COLOR",
+        "value": "#FFFFFF",
+        "name": "Background Color",
+        "cssName": "backgroundColor",
+        "dataType": "color"
+      },
+      {
+        "type": "BACKGROUND_IMAGE",
+        "value": "",
+        "name": "Background Image",
+        "cssName": "backgroundImage",
+        "dataType": "url"
+      },
+      {
+        "type": "MARGIN_VERTICAL",
+        "value": 0,
+        "name": "Vertical Spacing",
+        "cssName": "marginBlock",
+        "unit": "px",
+        "dataType": "number"
+      }
+    ]
+  },
+  {
+    "id": "2W1B4LZplxJ",
+    "type": "BASIC_WIDGET",
+    "name": "News Recommendation",
+    "html": "<div role=\"button\" tabindex=\"0\" aria-disabled=\"false\" aria-roledescription=\"sortable\" aria-describedby=\"DndDescribedBy-0\" class=\"select-none relative group w-full outline-sky-500/20 hover:outline hover:z-10\" style=\"transition: transform 200ms ease 0s;\"><div><table align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\" style=\"max-width: 600px; box-sizing: border-box; min-width: 600px; width: 600px; background-color: rgb(255, 255, 255); padding: 20px; border-radius: 10px; border: 1px solid rgba(0, 0, 0, 0.133); border-collapse: separate; background-repeat: no-repeat; background-size: cover; direction: rtl; margin-block: 0px;\"><tr style=\"width: 100%;\"><td><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\"><tbody><tr><td><div class=\"relative\"><a href=\"@@URL-1@@\" target=\"_blank\" style=\"color: inherit; text-decoration: none; line-height: 100%; display: inline-block; max-width: 100%; padding: 0px;\"><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%;mso-text-raise:0\" hidden>&nbsp;</i><![endif]--></span><span style=\"color: inherit; text-decoration: none; max-width: 100%; display: inline-block; line-height: 120%; text-transform: none;\"><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><td style=\"width: 40%;\"><img src=\"@@IMAGE-1@@\" width=\"240\" height=\"150\" style=\"display: block; outline: none; border: none; text-decoration: none; border-radius: 6px;\"></td><td style=\"width: 60%;\"><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><p style=\"font-size: 19px; line-height: 2rem; margin: 0px 20px 10px; font-weight: bold;\">@@TITLE-1@@</p></tr></tbody></table><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><a nx=\"true\" target=\"_blank\" style=\"font-size: 14px; margin: 0px 20px; padding: 0px; border-radius: 5px; background-color: rgb(13, 19, 73); color: rgb(255, 255, 255); width: fit-content; line-height: 100%; text-decoration: none; display: inline-block; max-width: 100%;\"><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%;mso-text-raise:0\" hidden>&nbsp;</i><![endif]--></span><span style=\"font-size: 14px; margin: 0px 20px; padding: 8px 14px; border-radius: 5px; background-color: rgb(13, 19, 73); color: rgb(255, 255, 255); width: fit-content; max-width: 100%; display: inline-block; line-height: 120%; text-decoration: none; text-transform: none;\">اقرا المزيد</span><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%\" hidden>&nbsp;</i><![endif]--></span></a></tr></tbody></table></td></tr></tbody></table></span><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%\" hidden>&nbsp;</i><![endif]--></span></a></div><br><div class=\"relative\"><a href=\"@@URL-2@@\" target=\"_blank\" style=\"color: inherit; text-decoration: none; line-height: 100%; display: inline-block; max-width: 100%; padding: 0px;\"><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%;mso-text-raise:0\" hidden>&nbsp;</i><![endif]--></span><span style=\"color: inherit; text-decoration: none; max-width: 100%; display: inline-block; line-height: 120%; text-transform: none;\"><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><td style=\"width: 40%;\"><img src=\"@@IMAGE-2@@\" width=\"240\" height=\"150\" style=\"display: block; outline: none; border: none; text-decoration: none; border-radius: 6px;\"></td><td style=\"width: 60%;\"><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><p style=\"font-size: 19px; line-height: 2rem; margin: 0px 20px 10px; font-weight: bold;\">@@TITLE-2@@</p></tr></tbody></table><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><a nx=\"true\" target=\"_blank\" style=\"font-size: 14px; margin: 0px 20px; padding: 0px; border-radius: 5px; background-color: rgb(13, 19, 73); color: rgb(255, 255, 255); width: fit-content; line-height: 100%; text-decoration: none; display: inline-block; max-width: 100%;\"><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%;mso-text-raise:0\" hidden>&nbsp;</i><![endif]--></span><span style=\"font-size: 14px; margin: 0px 20px; padding: 8px 14px; border-radius: 5px; background-color: rgb(13, 19, 73); color: rgb(255, 255, 255); width: fit-content; max-width: 100%; display: inline-block; line-height: 120%; text-decoration: none; text-transform: none;\">اقرا المزيد</span><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%\" hidden>&nbsp;</i><![endif]--></span></a></tr></tbody></table></td></tr></tbody></table></span><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%\" hidden>&nbsp;</i><![endif]--></span></a></div><br><div class=\"relative\"><a href=\"@@URL-3@@\" target=\"_blank\" style=\"color: inherit; text-decoration: none; line-height: 100%; display: inline-block; max-width: 100%; padding: 0px;\"><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%;mso-text-raise:0\" hidden>&nbsp;</i><![endif]--></span><span style=\"color: inherit; text-decoration: none; max-width: 100%; display: inline-block; line-height: 120%; text-transform: none;\"><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><td style=\"width: 40%;\"><img src=\"@@IMAGE-3@@\" width=\"240\" height=\"150\" style=\"display: block; outline: none; border: none; text-decoration: none; border-radius: 6px;\"></td><td style=\"width: 60%;\"><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><p style=\"font-size: 19px; line-height: 2rem; margin: 0px 20px 10px; font-weight: bold;\">@@TITLE-3@@</p></tr></tbody></table><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><a nx=\"true\" target=\"_blank\" style=\"font-size: 14px; margin: 0px 20px; padding: 0px; border-radius: 5px; background-color: rgb(13, 19, 73); color: rgb(255, 255, 255); width: fit-content; line-height: 100%; text-decoration: none; display: inline-block; max-width: 100%;\"><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%;mso-text-raise:0\" hidden>&nbsp;</i><![endif]--></span><span style=\"font-size: 14px; margin: 0px 20px; padding: 8px 14px; border-radius: 5px; background-color: rgb(13, 19, 73); color: rgb(255, 255, 255); width: fit-content; max-width: 100%; display: inline-block; line-height: 120%; text-decoration: none; text-transform: none;\">اقرا المزيد</span><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%\" hidden>&nbsp;</i><![endif]--></span></a></tr></tbody></table></td></tr></tbody></table></span><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%\" hidden>&nbsp;</i><![endif]--></span></a></div><br><div class=\"relative\"><a href=\"@@URL-4@@\" target=\"_blank\" style=\"color: inherit; text-decoration: none; line-height: 100%; display: inline-block; max-width: 100%; padding: 0px;\"><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%;mso-text-raise:0\" hidden>&nbsp;</i><![endif]--></span><span style=\"color: inherit; text-decoration: none; max-width: 100%; display: inline-block; line-height: 120%; text-transform: none;\"><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><td style=\"width: 40%;\"><img src=\"@@IMAGE-4@@\" width=\"240\" height=\"150\" style=\"display: block; outline: none; border: none; text-decoration: none; border-radius: 6px;\"></td><td style=\"width: 60%;\"><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><p style=\"font-size: 19px; line-height: 2rem; margin: 0px 20px 10px; font-weight: bold;\">@@TITLE-4@@</p></tr></tbody></table><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><a nx=\"true\" target=\"_blank\" style=\"font-size: 14px; margin: 0px 20px; padding: 0px; border-radius: 5px; background-color: rgb(13, 19, 73); color: rgb(255, 255, 255); width: fit-content; line-height: 100%; text-decoration: none; display: inline-block; max-width: 100%;\"><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%;mso-text-raise:0\" hidden>&nbsp;</i><![endif]--></span><span style=\"font-size: 14px; margin: 0px 20px; padding: 8px 14px; border-radius: 5px; background-color: rgb(13, 19, 73); color: rgb(255, 255, 255); width: fit-content; max-width: 100%; display: inline-block; line-height: 120%; text-decoration: none; text-transform: none;\">اقرا المزيد</span><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%\" hidden>&nbsp;</i><![endif]--></span></a></tr></tbody></table></td></tr></tbody></table></span><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%\" hidden>&nbsp;</i><![endif]--></span></a></div><br><div class=\"relative\"><a href=\"@@URL-5@@\" target=\"_blank\" style=\"color: inherit; text-decoration: none; line-height: 100%; display: inline-block; max-width: 100%; padding: 0px;\"><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%;mso-text-raise:0\" hidden>&nbsp;</i><![endif]--></span><span style=\"color: inherit; text-decoration: none; max-width: 100%; display: inline-block; line-height: 120%; text-transform: none;\"><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><td style=\"width: 40%;\"><img src=\"@@IMAGE-5@@\" width=\"240\" height=\"150\" style=\"display: block; outline: none; border: none; text-decoration: none; border-radius: 6px;\"></td><td style=\"width: 60%;\"><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><p style=\"font-size: 19px; line-height: 2rem; margin: 0px 20px 10px; font-weight: bold;\">@@TITLE-5@@</p></tr></tbody></table><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><a nx=\"true\" target=\"_blank\" style=\"font-size: 14px; margin: 0px 20px; padding: 0px; border-radius: 5px; background-color: rgb(13, 19, 73); color: rgb(255, 255, 255); width: fit-content; line-height: 100%; text-decoration: none; display: inline-block; max-width: 100%;\"><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%;mso-text-raise:0\" hidden>&nbsp;</i><![endif]--></span><span style=\"font-size: 14px; margin: 0px 20px; padding: 8px 14px; border-radius: 5px; background-color: rgb(13, 19, 73); color: rgb(255, 255, 255); width: fit-content; max-width: 100%; display: inline-block; line-height: 120%; text-decoration: none; text-transform: none;\">اقرا المزيد</span><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%\" hidden>&nbsp;</i><![endif]--></span></a></tr></tbody></table></td></tr></tbody></table></span><span><!--[if mso]><i style=\"letter-spacing: undefinedpx;mso-font-width:-100%\" hidden>&nbsp;</i><![endif]--></span></a></div></td></tr></tbody></table></td></tr></table></div></div>",
+    "extra": {
+      "imageSize": {
+        "width": 240,
+        "height": 150
+      },
+      "postsCount": 5,
+      "logic": "TRENDING_WIDGET"
+    },
+    "components": [
+      {
+        "id": "DJt8Jk_GC57",
+        "key": "ArticleRow",
+        "type": "ARTICLE_ROW",
+        "name": "Article Row",
+        "defaultValue": {
+          "readMoreBtn": "اقرا المزيد"
+        },
+        "value": {
+          "readMoreBtn": "اقرا المزيد"
+        }
+      }
+    ],
+    "properties": [
+      {
+        "type": "RECOMMENDATION_LOGIC",
+        "value": "TRENDING_WIDGET",
+        "name": "News Recommendation Logic",
+        "dataType": "dropdown",
+        "dropdownItems": [
+          {
+            "label": "Trending News",
+            "value": "TRENDING_WIDGET"
+          },
+          {
+            "label": "Personalized News",
+            "value": "CONTENT_WIDGET"
+          }
+        ]
+      },
+      {
+        "type": "ARTICLES_COUNT",
+        "value": "5",
+        "name": "Artilcles Count",
+        "dataType": "number"
+      },
+      {
+        "type": "DIRECTION",
+        "value": "rtl",
+        "name": "Direction",
+        "cssName": "direction",
+        "dataType": "custom"
+      },
+      {
+        "type": "PADDING",
+        "value": {
+          "inline": 20,
+          "block": 20
+        },
+        "name": "Padding",
+        "dataType": "custom"
+      },
+      {
+        "type": "BORDER_RADIUS",
+        "value": 10,
+        "name": "Rounding",
+        "cssName": "borderRadius",
+        "unit": "px",
+        "dataType": "number"
+      },
+      {
+        "type": "BACKGROUND_COLOR",
+        "value": "#FFFFFF",
+        "name": "Background Color",
+        "cssName": "backgroundColor",
+        "dataType": "color"
+      },
+      {
+        "type": "MARGIN_VERTICAL",
+        "value": 0,
+        "name": "Vertical Spacing",
+        "cssName": "marginBlock",
+        "unit": "px",
+        "dataType": "number"
+      }
+    ]
+  },
+  {
+    "id": "_95Id6GUS8A",
+    "type": "FOOTER",
+    "name": "Basic Footer",
+    "html": "<div role=\"button\" tabindex=\"0\" aria-disabled=\"false\" aria-roledescription=\"sortable\" aria-describedby=\"DndDescribedBy-0\" class=\"select-none relative group w-full outline-sky-500/20 hover:outline hover:z-10\" style=\"transition: transform 200ms ease 0s;\"><div><table align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\" style=\"max-width: 600px; box-sizing: border-box; min-width: 600px; width: 600px; background-color: rgb(255, 255, 255); padding: 20px; border-radius: 10px; border: 1px solid rgba(0, 0, 0, 0.133); border-collapse: separate; background-repeat: no-repeat; background-size: cover; margin-block: 0px;\"><tr style=\"width: 100%;\"><td><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\"><tbody><tr><td><div class=\"relative\"><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" style=\"margin-bottom: 20px;\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><td align=\"center\"><a target=\"_blank\" href=\"https://www.facebook.com\" style=\"color: rgb(6, 125, 247); text-decoration: none;\"><img alt=\"facebook\" src=\"https://newsletterx-dev.cognativex.com/img/facebook.png\" width=\"50\" style=\"display: block; outline: none; border: none; text-decoration: none;\"></a></td><td align=\"center\"><a target=\"_blank\" href=\"https://www.instagram.com\" style=\"color: rgb(6, 125, 247); text-decoration: none;\"><img alt=\"instagram\" src=\"https://newsletterx-dev.cognativex.com/img/instagram.png\" width=\"50\" style=\"display: block; outline: none; border: none; text-decoration: none;\"></a></td><td align=\"center\"><a target=\"_blank\" href=\"https://www.x.com\" style=\"color: rgb(6, 125, 247); text-decoration: none;\"><img alt=\"twitter\" src=\"https://newsletterx-dev.cognativex.com/img/twitter.png\" width=\"50\" style=\"display: block; outline: none; border: none; text-decoration: none;\"></a></td> </tr></tbody></table></div><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><td><div class=\"relative\"><p style=\"font-size: 16px; line-height: 24px; margin: 0px; text-align: center; font-weight: 400; color: rgb(168, 168, 168);\"><span nx=\"true\" spellcheck=\"false\" class=\"cursor-text\">You are recieving this email because you are subscribed to our newsletter. You can unsubscribe any time by clicking the link below</span></p></div></td></tr></tbody></table><table width=\"100%\" align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody style=\"width: 100%;\"><tr style=\"width: 100%;\"><td style=\"text-align: center;\"><a target=\"_blank\" href=\"@@UNSUBSCRIBE_API@@\" style=\"color: rgb(6, 125, 247); text-decoration: none;\">Unsubscribe</a></td></tr></tbody></table></td></tr></tbody></table></td></tr></table></div></div>",
+    "extra": {},
+    "components": [
+      {
+        "id": "m0LqkohJhbs",
+        "key": "footerSocialIcons",
+        "type": "SOCIAL_ICONS",
+        "aliasName": "Footer Social Links",
+        "name": "Social Icons",
+        "properties": [
+          {
+            "type": "SOCIAL_LINKS",
+            "value": {
+              "facebook": "https://www.facebook.com",
+              "instagram": "https://www.instagram.com",
+              "twitter": "https://www.x.com"
+            },
+            "name": "Social Links",
+            "dataType": "custom"
+          }
+        ],
+        "defaultValue": {
+          "facebook": "https://www.facebook.com",
+          "instagram": "https://www.instagram.com",
+          "twitter": "https://www.x.com"
+        },
+        "value": {
+          "facebook": "https://www.facebook.com",
+          "instagram": "https://www.instagram.com",
+          "twitter": "https://www.x.com"
+        }
+      },
+      {
+        "id": "6_TkYzKBYdr",
+        "key": "FooterEpilogue",
+        "type": "DESCRIPTION",
+        "aliasName": "Footer Epilogue",
+        "name": "Description",
+        "properties": [
+          {
+            "type": "TEXT_ALIGN",
+            "value": "center",
+            "name": "Text Alignment",
+            "cssName": "textAlign",
+            "dataType": "custom"
+          },
+          {
+            "type": "FONT_SIZE",
+            "value": 16,
+            "name": "Font Size",
+            "cssName": "fontSize",
+            "unit": "px",
+            "dataType": "number"
+          },
+          {
+            "type": "FONT_WEIGHT",
+            "value": 400,
+            "name": "Font Weight",
+            "cssName": "fontWeight",
+            "dataType": "number"
+          },
+          {
+            "type": "COLOR",
+            "value": "#a8a8a8",
+            "name": "Text Color",
+            "cssName": "color",
+            "dataType": "color"
+          }
+        ],
+        "defaultValue": "You are recieving this email because you are subscribed to our newsletter. You can unsubscribe any time by clicking the link below",
+        "value": "You are recieving this email because you are subscribed to our newsletter. You can unsubscribe any time by clicking the link below"
+      }
+    ],
+    "properties": [
+      {
+        "type": "PADDING",
+        "value": {
+          "inline": 20,
+          "block": 20
+        },
+        "name": "Padding",
+        "dataType": "custom"
+      },
+      {
+        "type": "BORDER_RADIUS",
+        "value": 10,
+        "name": "Rounding",
+        "cssName": "borderRadius",
+        "unit": "px",
+        "dataType": "number"
+      },
+      {
+        "type": "BACKGROUND_COLOR",
+        "value": "#FFFFFF",
+        "name": "Background Color",
+        "cssName": "backgroundColor",
+        "dataType": "color"
+      },
+      {
+        "type": "MARGIN_VERTICAL",
+        "value": 0,
+        "name": "Vertical Spacing",
+        "cssName": "marginBlock",
+        "unit": "px",
+        "dataType": "number"
+      }
+    ]
+  }
+]
