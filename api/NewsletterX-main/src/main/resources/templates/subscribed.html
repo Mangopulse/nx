@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Subscribe</title>
+    <style>
+
+        .h-screen {
+            height: 100vh;
+        }
+
+        .w-screen {
+            width: 100vw;
+        }
+
+        .overflow-hidden {
+            overflow: hidden;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .gap-30 {
+            gap: 30px;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .py-9 {
+            padding-top: 2.25rem;
+            padding-bottom: 2.25rem;
+        }
+
+        .px-4 {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .space-y-11 {
+            margin-bottom: 2.75rem;
+        }
+
+        .text-xl {
+            font-size: 1.25rem;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .strong {
+            font-weight: bold;
+        }
+
+        .rounded {
+            border-radius: 0.25rem;
+        }
+
+        .p-4 {
+            padding: 1rem;
+        }
+
+        .w-[min(700px,100%)] {
+            width: 100%;
+            max-width: 700px;
+        }
+
+        .md\:space-x-2 {
+            margin-right: 0.5rem;
+            margin-left: 0.5rem;
+        }
+
+        .md\:flex-row {
+            flex-direction: row;
+        }
+
+        .bg-primary-800 {
+            border: 1px solid #20172a;
+        }
+
+        .text-primary-foreground {
+            color: #20172a;
+        }
+
+        .shadow {
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+
+
+    </style>
+</head>
+
+<body>
+<div class="h-screen w-screen overflow-hidden items-center gap-30 flex flex-col py-9 px-4 space-y-11">
+        <span class="text-xl text-center">
+            Welcome to your personalized newsletter.
+        </span>
+    <div class="text-center rounded p-4 w-[min(700px,100%)] space-y-2 md:space-x-2 md:space-y-0 flex flex-col md:flex-row items-center bg-primary-800 text-primary-foreground shadow">
+        <!-- CheckIcon will be displayed here -->
+        <span>
+                You are successfully subscribed!
+            </span>
+    </div>
+</div>
+</body>
+
+</html>
