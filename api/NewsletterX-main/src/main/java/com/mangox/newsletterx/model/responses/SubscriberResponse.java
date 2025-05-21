@@ -13,4 +13,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SubscriberResponse extends SuperResponse {
     Subscriber subscriber;
+    String confirmationLink;
 }
