@@ -160,9 +160,9 @@ public class SubscriptionService {
      * @param email            The user's email
      * @param confirmationLink The confirmation link
      * @param appDomain        The application domain
-          * @throws IOException 
-          */
-         private void sendVerificationEmail(String email, String confirmationLink, String appDomain) throws IOException {
+     * @throws IOException
+     */
+    private void sendVerificationEmail(String email, String confirmationLink, String appDomain) throws IOException {
         boolean sent = sendSubscriptionEmail(email, confirmationLink, appDomain);
         if (!sent) {
             log.error("Failed to send verification email for user {} in domain {}", email, appDomain);
@@ -227,7 +227,7 @@ public class SubscriptionService {
         // Generate confirmation link and send verification email
         String confirmationLink = generateConfirmationLink(
                 subscription.getEmail(),
-                subscription.getAppDomain(),
+                subscription.getVerificationToken(),
                 subscription.getAppDomain());
 
         sendSubscriptionEmail(
