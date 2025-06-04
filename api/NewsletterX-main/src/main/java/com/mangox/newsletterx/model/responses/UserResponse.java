@@ -16,4 +16,5 @@ public class UserResponse {
     String website;
     Boolean enabled;
     List<Object> walkthrough;
+    String confirmationLink;
 }

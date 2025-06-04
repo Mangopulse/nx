@@ -1,10 +1,12 @@
-# To run docker-compose -f postgressDB.yaml up -d
+# To run: docker-compose -f postgressDB.yaml up --build
+
 version: '3.8'
+
 services:
   postgres:
     container_name: container-pg
     image: postgres
-    hostname: localhost
+    hostname: postgres
     ports:
       - "5432:5432"
     environment:
@@ -14,6 +16,23 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
     restart: unless-stopped
+
+  springboot-app:
+    container_name: container-springboot
+    build: .
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/test_db
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: root
+    restart: unless-stopped
+
+volumes:
+  postgres-data:
+
 
   # pgadmin:
   #   container_name: container-pgadmin
@@ -26,6 +45,3 @@ services:
   #     PGADMIN_DEFAULT_EMAIL: admin@admin.com
   #     PGADMIN_DEFAULT_PASSWORD: root
   #   restart: unless-stopped
-
-volumes:
-  postgres-data:

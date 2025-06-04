@@ -12,3 +12,7 @@ https://www.youtube.com/@Newsletterx
 1 - Subscribe endpoint
 2 - Confirmation endpoint
 3 - Unsubscribe endpoint
+4 - JWT
+
+Notes:
+Admin has to be entered manually

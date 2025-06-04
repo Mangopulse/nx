@@ -23,4 +23,5 @@ public class AuthenticationResponse extends SuperResponse {
     private List<Object> walkthrough;
     private String superUser;
     private List<String> websites;
+
 }

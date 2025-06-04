@@ -248,6 +248,7 @@ public class SubscriptionService {
      * @return Subscriber object for the resubscribed user
      */
     private Subscriber handleResubscription(EmailNewsletterSubscriptions subscription) {
+        
         // Update subscription status
         subscription.setUnsubscribed(false);
         subscription.setLastModifiedDate(new Date());
@@ -258,8 +259,13 @@ public class SubscriptionService {
     }
 
     public SubscribersResponse BatchSubscribe(List<BatchSubscriber> subscribers, String website) {
+        // create a list of subscriptions
         List<EmailNewsletterSubscriptions> subscriptions = new ArrayList<>();
+
+        // create a list of saved emails
         List<String> savedEmail = new ArrayList<>();
+
+        // loop through the subscribers
         for (BatchSubscriber subscriber : subscribers) {
             if (!emailNewsletterSubscriptionsRepository.existsByEmailAndAppDomain(subscriber.getEmail(), website)
                     && !savedEmail.contains(subscriber.getEmail())) {
@@ -271,20 +277,31 @@ public class SubscriptionService {
 
         }
 
+        // save the subscriptions
         emailNewsletterSubscriptionsRepository.saveAll(subscriptions);
+
+        // return the subscribers response
         return new SubscribersResponse(generateSubscribers(subscriptions));
     }
 
     public String generateConfirmationLink(String email, String token, String domain) throws IOException {
 
-        var link = envVarsService.getEnvironmentVariable(EnvVariables.LINK.name())
+        // get the link from the environment variable
+        var name = EnvVariables.LINK.name();
+
+        // replace the domain and token in the confirmation link
+        var link = envVarsService.getEnvironmentVariable(name)
                 + CONFIRMATION_API.replace(DOMAIN, domain).replace(TOKEN, token);
         return link;
     }
 
     public boolean sendSubscriptionEmail(String email, String confirmationLink, String domain) throws IOException {
         Map<String, Object> templateModel = new HashMap<>();
+
+        // put the confirmation link in the template model
         templateModel.put(LINK, confirmationLink);
+
+        // put the domain in the template model
         templateModel.put(DOMAIN_TMP, domain);
 
         return emailSenderService.sendHtmlTemplateEmail(sender, email, CONFIRMATION_EMAIL_SUBJECT,
@@ -293,39 +310,59 @@ public class SubscriptionService {
     }
 
     public EmailNewsletterSubscriptions confirmSubscriber(String token) throws Exception {
+
+        // find the subscription by the token
         EmailNewsletterSubscriptions emailNewsletterSubscriptions = emailNewsletterSubscriptionsRepository
                 .findByVerificationToken(token);
+
+        // if the subscription is not found, throw an error
         if (Objects.isNull(emailNewsletterSubscriptions)) {
             log.error("Failed to confirm user with token " + token);
             throw new ErrorException("User not found ; Unable to Confirm");
         }
 
+        // set the subscription to verified
         emailNewsletterSubscriptions.setVerified(true);
+
+        // set the last modified date
         emailNewsletterSubscriptions.setLastModifiedDate(new Date());
+
+        // save the subscription
         emailNewsletterSubscriptionsRepository.save(emailNewsletterSubscriptions);
         return emailNewsletterSubscriptions;
     }
 
     public EmailNewsletterSubscriptions unsubscribeUser(String email, String domain) throws Exception {
+
+        // find the subscription by the email and domain
         EmailNewsletterSubscriptions emailNewsletterSubscription = emailNewsletterSubscriptionsRepository
                 .findByEmailAndAppDomain(email, domain);
+
+        // if the subscription is not found, throw an error
         if (Objects.isNull(emailNewsletterSubscription)) {
             log.error("Failed to unsubscribe user with email " + email + " from domain " + domain);
             throw new ErrorException("Failed to unsubscribe user with email " + email + " from domain " + domain);
         }
 
+        // set the subscription to unsubscribed
         emailNewsletterSubscription.setUnsubscribed(true);
+
+        // set the last modified date
         emailNewsletterSubscription.setLastModifiedDate(new Date());
+
+        // save the subscription
         emailNewsletterSubscriptionsRepository.save(emailNewsletterSubscription);
         return emailNewsletterSubscription;
     }
 
     public SubscribersResponse getSubscriptionsByWebsite(String website, int limit, int offset) {
+        // get the subscriptions by the domain with pagination
         return new SubscribersResponse(generateSubscribers(
                 emailNewsletterSubscriptionsRepository.getSubscriptionsByDomainWithPagination(website, limit, offset)));
     }
 
     public Subscriber generateSubscriber(EmailNewsletterSubscriptions emailNewsletterSubscriptions) {
+        // generate the subscriber
         return new Subscriber(
                 emailNewsletterSubscriptions.getEmail(),
                 emailNewsletterSubscriptions.getFirstName(),
@@ -337,6 +374,7 @@ public class SubscriptionService {
     }
 
     public List<Subscriber> generateSubscribers(List<EmailNewsletterSubscriptions> emailNewsletterSubscriptions) {
+        // generate the subscribers
         List<Subscriber> subscribers = new ArrayList<>();
         for (EmailNewsletterSubscriptions emailNewsletterSubscription : emailNewsletterSubscriptions)
             subscribers.add(generateSubscriber(emailNewsletterSubscription));
@@ -344,15 +382,21 @@ public class SubscriptionService {
     }
 
     public SubscriberStatusResponse getStatus(String email, String website) throws Exception {
+        // find the subscription by the email and domain
         EmailNewsletterSubscriptions emailNewsletterSubscriptions = emailNewsletterSubscriptionsRepository
                 .findByEmailAndAppDomain(email, website);
+
+        // if the subscription is not found, throw an error
         if (emailNewsletterSubscriptions == null)
             throw new ErrorException("No Subscription was found with the following email!");
+
+        // return the subscription status
         return new SubscriberStatusResponse(emailNewsletterSubscriptions.isVerified(),
                 emailNewsletterSubscriptions.isUnsubscribed());
     }
 
     public SubscribersCountResponse getSubscribersCountByWebsite(String website) {
+        // get the subscribers count by the domain
         return new SubscribersCountResponse(
                 emailNewsletterSubscriptionsRepository.countVerifiedAndSubscribedUsers(website));
     }
