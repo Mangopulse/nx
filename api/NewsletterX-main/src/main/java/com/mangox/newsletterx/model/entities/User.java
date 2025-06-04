@@ -29,6 +29,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
+    //TODO: Rename it to verified
     @Column(nullable = false)
     private boolean enabled;
 

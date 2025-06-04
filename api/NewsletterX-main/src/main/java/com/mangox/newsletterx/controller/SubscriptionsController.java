@@ -38,10 +38,9 @@ public class SubscriptionsController {
         try {
             // Get the original response (including the confirmation link)
             SubscriberResponse subscriberResponse = subscriptionService.subscribeUser(
-                subscriber.getAppDomain(), 
-                subscriber.getEmail(),
-                subscriber.getUserId()
-            );
+                    subscriber.getAppDomain(),
+                    subscriber.getEmail(),
+                    subscriber.getUserId());
 
             // If in production, remove the confirmation link
             if ("prod".equalsIgnoreCase(activeProfile)) {
@@ -52,71 +51,79 @@ public class SubscriptionsController {
 
         } catch (ErrorException e) {
             return new ResponseEntity<>(
-                new ErrorResponse(HttpStatus.BAD_REQUEST, e.getMessage()),
-                HttpStatus.BAD_REQUEST
-            );
+                    new ErrorResponse(HttpStatus.BAD_REQUEST, e.getMessage()),
+                    HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             return new ResponseEntity<>(
-                new ErrorResponse(HttpStatus.BAD_REQUEST,
-                    "Operation Failed , if this happens again please contact the support team"),
-                HttpStatus.BAD_REQUEST
-            );
+                    new ErrorResponse(HttpStatus.BAD_REQUEST,
+                            "Operation Failed , if this happens again please contact the support team"),
+                    HttpStatus.BAD_REQUEST);
         }
     }
 
     @GetMapping("/confirm-newsletter-subscriber")
     public RedirectView verifyEmailSubscriber(@RequestParam("token") String confirmationToken,
-                                              @RequestParam("domain") String domain) {
+            @RequestParam("domain") String domain) {
         try {
+            // check if the token is valid
             subscriptionService.confirmSubscriber(confirmationToken);
             log.info("user with token is successfully verified !");
             return new RedirectView(
-                envVarsService.getEnvironmentVariable(EnvVariables.LINK.name()) + "/status/subscribed");
+                    envVarsService.getEnvironmentVariable(EnvVariables.LINK.name()) + "/status/subscribed");
         } catch (Exception e) {
             log.error("Failed to confirm email of user.");
             return new RedirectView(
-                envVarsService.getEnvironmentVariable(EnvVariables.LINK.name()) + "/status/confirmationFailure");
+                    envVarsService.getEnvironmentVariable(EnvVariables.LINK.name()) + "/status/confirmationFailure");
         }
     }
 
     @GetMapping("/unsubscribe")
     public RedirectView userUnsubscribe(@RequestParam("email") String email,
-                                        @RequestParam("domain") String domain) {
+            @RequestParam("domain") String domain) {
         try {
-            EmailNewsletterSubscriptions emailNewsletterSubscriptions = subscriptionService.unsubscribeUser(email, domain);
+            // unsubscribe the user
+            EmailNewsletterSubscriptions emailNewsletterSubscriptions = subscriptionService.unsubscribeUser(email,
+                    domain);
+
+            // if the subscription is found, redirect to the unsubscribed page
             if (Objects.nonNull(emailNewsletterSubscriptions)) {
                 log.info("Successfully unsubscribed user with email: {}", email);
                 return new RedirectView(
-                    envVarsService.getEnvironmentVariable(EnvVariables.LINK.name()) + "/status/unsubscribed");
+                        envVarsService.getEnvironmentVariable(EnvVariables.LINK.name()) + "/status/unsubscribed");
             }
+
+            // if the subscription is not found, redirect to the confirmation failure page
             log.warn("Failed to unsubscribe user with email: {} - subscription not found", email);
             return new RedirectView(
-                envVarsService.getEnvironmentVariable(EnvVariables.LINK.name()) + "/status/confirmationFailure");
+                    envVarsService.getEnvironmentVariable(EnvVariables.LINK.name()) + "/status/confirmationFailure");
+
+            // if the subscription is not found, redirect to the confirmation failure page
         } catch (Exception e) {
             log.error("Error unsubscribing user with email: {} - {}", email, e.getMessage());
             return new RedirectView(
-                envVarsService.getEnvironmentVariable(EnvVariables.LINK.name()) + "/status/confirmationFailure");
+                    envVarsService.getEnvironmentVariable(EnvVariables.LINK.name()) + "/status/confirmationFailure");
         }
     }
 
     @PostMapping("/status")
     public ResponseEntity<?> checkStatus(@RequestBody SubscriberStatusRequest subscriberStatusRequest) {
+
+        // get the status of the subscription
         try {
             return ResponseEntity.ok(subscriptionService.getStatus(
-                subscriberStatusRequest.getEmail(),
-                subscriberStatusRequest.getAppDomain()
-            ));
+                    subscriberStatusRequest.getEmail(),
+                    subscriberStatusRequest.getAppDomain()));
+
+            // if the subscription is not found, return a bad request
         } catch (ErrorException e) {
             return new ResponseEntity<>(
-                new ErrorResponse(HttpStatus.BAD_REQUEST, e.getMessage()),
-                HttpStatus.BAD_REQUEST
-            );
+                    new ErrorResponse(HttpStatus.BAD_REQUEST, e.getMessage()),
+                    HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             return new ResponseEntity<>(
-                new ErrorResponse(HttpStatus.BAD_REQUEST,
-                    "Operation Failed , if this happens again please contact the support team"),
-                HttpStatus.BAD_REQUEST
-            );
+                    new ErrorResponse(HttpStatus.BAD_REQUEST,
+                            "Operation Failed , if this happens again please contact the support team"),
+                    HttpStatus.BAD_REQUEST);
         }
     }
 }

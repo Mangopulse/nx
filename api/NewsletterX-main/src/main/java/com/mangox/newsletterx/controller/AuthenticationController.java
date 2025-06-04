@@ -36,49 +36,80 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request) throws Exception {
+        // register the user
         try {
             return ResponseEntity.ok(service.register(request));
-        } catch (ErrorException e) {
-            return new ResponseEntity<>(new ErrorResponse(HttpStatus.BAD_REQUEST, e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+
+        // if the user is not found, return a bad request
+        catch (ErrorException e) {
+            return new ResponseEntity<>(new ErrorResponse(HttpStatus.BAD_REQUEST, e.getMessage()),
+                    HttpStatus.BAD_REQUEST);
+
         } catch (Exception e) {
             log.error(e.getMessage());
-            return new ResponseEntity<>(new ErrorResponse(HttpStatus.BAD_REQUEST, "Operation Failed , if this happens again please contact the support team"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(
+                    new ErrorResponse(HttpStatus.BAD_REQUEST,
+                            "Operation Failed , if this happens again please contact the support team"),
+                    HttpStatus.BAD_REQUEST);
         }
     }
 
     @PostMapping("/authenticate")
     public ResponseEntity<?> authenticate(@RequestBody AuthenticationRequest request) {
+        // authenticate the user
         try {
             return ResponseEntity.ok(service.authenticate(request));
-        } catch (DisabledException e) {
-            return new ResponseEntity<>(new ErrorResponse(HttpStatus.BAD_REQUEST, "Please verify your email and try again!"), HttpStatus.BAD_REQUEST);
+        }
+
+        // if the user is not found, return a bad request
+        catch (DisabledException e) {
+            return new ResponseEntity<>(
+                    new ErrorResponse(HttpStatus.BAD_REQUEST, "Please verify your email and try again!"),
+                    HttpStatus.BAD_REQUEST);
         } catch (ErrorException e) {
-            return new ResponseEntity<>(new ErrorResponse(HttpStatus.BAD_REQUEST, e.getMessage()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ErrorResponse(HttpStatus.BAD_REQUEST, e.getMessage()),
+                    HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             log.error(e.getMessage());
-            return new ResponseEntity<>(new ErrorResponse(HttpStatus.BAD_REQUEST, "your email or password are not correct!"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(
+                    new ErrorResponse(HttpStatus.BAD_REQUEST, "your email or password are not correct!"),
+                    HttpStatus.BAD_REQUEST);
         }
 
     }
 
     @PostMapping("/authenticate-admin")
-    public ResponseEntity<?> authenticate(@RequestBody AdminAuthenticateRequest request){
-        try{
+    public ResponseEntity<?> authenticate(@RequestBody AdminAuthenticateRequest request) {
+        // authenticate the admin
+        try {
             return ResponseEntity.ok(service.authenticateAdmin(request));
-        }catch (DisabledException e){
-            return new ResponseEntity<>(new ErrorResponse(HttpStatus.BAD_REQUEST, "Please verify your email and try again!"), HttpStatus.BAD_REQUEST);
-        }catch (ErrorException e){
-            return new ResponseEntity<>(new ErrorResponse(HttpStatus.BAD_REQUEST, e.getMessage()), HttpStatus.BAD_REQUEST);
-        }catch (Exception e){
-            return new ResponseEntity<>(new ErrorResponse(HttpStatus.BAD_REQUEST, "your email or password are not correct!"), HttpStatus.BAD_REQUEST);
+        }
+
+        // if the user is not found, return a bad request
+        catch (DisabledException e) {
+            return new ResponseEntity<>(
+                    new ErrorResponse(HttpStatus.BAD_REQUEST, "Please verify your email and try again!"),
+                    HttpStatus.BAD_REQUEST);
+        } catch (ErrorException e) {
+            return new ResponseEntity<>(new ErrorResponse(HttpStatus.BAD_REQUEST, e.getMessage()),
+                    HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<>(
+                    new ErrorResponse(HttpStatus.BAD_REQUEST, "your email or password are not correct!"),
+                    HttpStatus.BAD_REQUEST);
         }
     }
 
     @PostMapping("/refresh-token")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // refresh the token
         try {
             service.refreshToken(request, response);
-        } catch (Exception e) {
+        }
+
+        // if the token is not found, return a bad request
+        catch (Exception e) {
             log.error(e.getMessage());
         }
 
@@ -86,38 +117,65 @@ public class AuthenticationController {
 
     @GetMapping(value = "/confirm-email", produces = MediaType.APPLICATION_JSON_VALUE)
     public RedirectView confirmUserAccount(@RequestParam("token") String confirmationToken) {
+        // confirm the user account
         try {
             User websiteUsers = service.confirmEmail(confirmationToken);
+
+            // if the user is found, redirect to the confirmation success page
             if (Objects.nonNull(websiteUsers)) {
-                return new RedirectView(envVarsService.getEnvironmentVariable(EnvVariables.LINK.name())+"/status/confirmationSuccess");
+                var link = envVarsService.getEnvironmentVariable(EnvVariables.LINK.name());
+                return new RedirectView(
+                        link + "/status/confirmationSuccess");
             }
-            return new RedirectView(envVarsService.getEnvironmentVariable(EnvVariables.LINK.name())+"/status/confirmationFailure");
-        } catch (Exception e) {
+
+            // if the user is not found, redirect to the confirmation failure page
+            var link = envVarsService.getEnvironmentVariable(EnvVariables.LINK.name());
+            return new RedirectView(
+                    link + "/status/confirmationFailure");
+        }
+
+        // if the user is not found, redirect to the confirmation failure page
+        catch (Exception e) {
             log.error(e.getMessage());
-            return new RedirectView(envVarsService.getEnvironmentVariable(EnvVariables.LINK.name())+"/status/confirmationFailure");
+            var link = envVarsService.getEnvironmentVariable(EnvVariables.LINK.name());
+            return new RedirectView(
+                    link + "/status/confirmationFailure");
         }
     }
 
     @PostMapping(value = "/forget-password", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> forgetPassword(@RequestBody ForgetPasswordRequest request){
-        try{
-            service.forgetPasswordEmail(request.getEmail());
-            return ResponseEntity.ok(new SuperResponse());
-        }catch (ErrorException e){
-            return new ResponseEntity<>(new ErrorResponse(HttpStatus.BAD_REQUEST, e.getMessage()), HttpStatus.BAD_REQUEST);
-        }catch (Exception e){
-            return new ResponseEntity<>(new ErrorResponse(HttpStatus.BAD_REQUEST, "Operation Failed , if this happens again please contact the support team"), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<?> forgetPassword(@RequestBody ForgetPasswordRequest request) {
+        try {
+            // send the forget password email and get response with reset link in debug mode
+            return ResponseEntity.ok(service.forgetPasswordEmail(request.getEmail()));
+
+            // if the user is not found, return a bad request
+        } catch (ErrorException e) {
+            return new ResponseEntity<>(new ErrorResponse(HttpStatus.BAD_REQUEST, e.getMessage()),
+                    HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<>(
+                    new ErrorResponse(HttpStatus.BAD_REQUEST,
+                            "Operation Failed , if this happens again please contact the support team"),
+                    HttpStatus.BAD_REQUEST);
         }
     }
 
     @PostMapping(value = "/reset-password")
-    public ResponseEntity<?> resetPassword(@RequestBody ResetPasswordRequest request){
-        try{
+    public ResponseEntity<?> resetPassword(@RequestBody ResetPasswordRequest request) {
+        try {
+            // reset the password
             return ResponseEntity.ok(userService.resetPassword(request.getToken(), request.getPassword()));
-        }catch (ErrorException e){
-            return new ResponseEntity<>(new ErrorResponse(HttpStatus.BAD_REQUEST, e.getMessage()), HttpStatus.BAD_REQUEST);
-        }catch (Exception e){
-            return new ResponseEntity<>(new ErrorResponse(HttpStatus.BAD_REQUEST, "Operation Failed , if this happens again please contact the support team"), HttpStatus.BAD_REQUEST);
+
+            // if the user is not found, return a bad request
+        } catch (ErrorException e) {
+            return new ResponseEntity<>(new ErrorResponse(HttpStatus.BAD_REQUEST, e.getMessage()),
+                    HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<>(
+                    new ErrorResponse(HttpStatus.BAD_REQUEST,
+                            "Operation Failed , if this happens again please contact the support team"),
+                    HttpStatus.BAD_REQUEST);
         }
     }
 }
