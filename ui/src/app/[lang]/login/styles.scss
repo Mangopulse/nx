@@ -1,0 +1,12 @@
+.brand-side {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 40px;
+    height: 100vh;
+
+    .logo {
+        width: 300px;
+        aspect-ratio: 9;
+    }
+}

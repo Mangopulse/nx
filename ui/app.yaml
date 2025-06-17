@@ -1,0 +1,9 @@
+# [START runtime]
+runtime: nodejs20
+# [END runtime]
+service: newsletterx-website
+handlers:
+- url: /.*
+  script: auto
+  secure: always
+  redirect_http_response_code: 301

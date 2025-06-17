@@ -1,0 +1,54 @@
+@use "@/styles/abstract/colors";
+
+.signup-container {
+    width: 100vw;
+    min-height: 100vh;
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: 6fr 10fr;
+
+    .visual-side {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .form-side {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 40px;
+        gap: 40px;
+        background: colors.$background-dark-900;
+        position: relative;
+        isolation: isolate;
+
+        form {
+            width: fit-content;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background-color: #9991;
+            padding: 30px 40px;
+            border-radius: 5px;
+            border: 1px solid #fff2;
+            backdrop-filter: blur(10px);
+            color: colors.$white;
+            margin-top: auto;
+            max-width: 450px;
+
+
+            .form-title {
+                margin-bottom: 1rem;
+                h2 {
+                    margin-bottom: 0.3rem;
+                }
+                p{
+                    font-size: .8rem;
+                }
+            }
+        }
+    }
+}

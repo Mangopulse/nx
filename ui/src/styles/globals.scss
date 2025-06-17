@@ -1,0 +1,131 @@
+@use "@/styles/abstract/colors";
+@use "@/styles/abstract/fonts";
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html,
+body {
+    max-width: 100vw;
+    min-height: 100vh;
+    overflow-y: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* utility */
+.img-wrap {
+    position: relative;
+    img {
+        width: 100%;
+        object-fit: cover;
+        height: 100%;
+    }
+}
+img{
+    user-select: none;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    label {
+        font-size: 0.8em;
+        opacity: 0.75;
+    }
+}
+.muted {
+    opacity: 0.6;
+}
+.vertical-dashed-line {
+    width: 0; /* Set width to 0 so it's just a vertical line */
+    height: 90%; /* Adjust the height as needed */
+    outline: 2px dashed #737272; /* 2px width, dashed style, and black color */
+    opacity: 60%;
+}
+.stop-animation-on-hover:hover{
+    animation-play-state: paused;
+}
+
+
+.nx-scrollbar {
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+    &::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: #cec4e4c6;
+        border-radius: 5px;
+        display: none;
+    }
+    &:hover::-webkit-scrollbar-thumb {
+        display: block;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: rgb(138, 120, 159);
+    }
+    &::-webkit-scrollbar-corner {
+        background-color: transparent;
+    }
+}
+
+.break-after-15 {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-all;
+    max-width: 15ch; /* Adjust the maximum width as needed */
+  }
+
+.no-scrollbar {
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+
+.margin-top-header{
+  margin-top: var(--header-height);
+}
+.margin-left-sidebar{
+    @apply ml-56
+}
+.h-screen-with-header {
+    height: calc(100vh - var(--header-height));
+}
+.min-h-screen-with-header{
+    min-height: calc(100vh - var(--header-height));
+}
+
+
+
+.email-canvas [contentEditable]:focus-visible,
+.email-canvas [contentEditable]:hover {
+    outline: none;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-decoration-skip-ink: none;
+    @apply decoration-sky-500;
+}
+
+
+.no-arrows-input {
+    -moz-appearance: textfield;
+ }
+ 
+ .no-arrows-input::-webkit-outer-spin-button,
+ .no-arrows-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+ }
+
+
+

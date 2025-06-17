@@ -1,0 +1,13 @@
+.copyright {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+
+    .inline-logo {
+        height: .9em;
+        margin-bottom: .09em;
+        aspect-ratio: 8;
+    }
+}
