@@ -7,7 +7,7 @@ import { getCookie, setCookie } from "cookies-next";
 
 
 class Auth {
-    public apiUrl: string | undefined = process.env.NEXT_PUBLIC_API || "https://api-appx.cognativex.com";
+    public apiUrl: string | undefined = process.env.NEXT_PUBLIC_API || "http://13.40.220.91:8080";
     private user: User | undefined;
 
     constructor() {
