@@ -51,6 +51,16 @@ cd api
 mvn clean package
 cd ..
 
+# === UPDATE .env IN FRONTEND (ui/.env) ===
+ENV_FILE="ui/.env"
+
+if [ -f "$ENV_FILE" ]; then
+  echo "Updating NEXT_PUBLIC_API in $ENV_FILE to $LINK_VALUE"
+  sed -i "s|^NEXT_PUBLIC_API=.*|NEXT_PUBLIC_API=${LINK_VALUE}|" "$ENV_FILE"
+else
+  echo "⚠️ $ENV_FILE not found. Skipping .env update."
+fi
+
 # === RUN DOCKER COMPOSE ===
 echo "Running Docker Compose..."
 sudo docker-compose up -d --build
