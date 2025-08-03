@@ -1,4 +1,4 @@
-<img width="1851" height="822" alt="2" src="https://github.com/user-attachments/assets/abb22b01-5835-4bd9-99c4-2e81ccd1ecfe" /># NewsletterX Deployment
+# NewsletterX Deployment
 
 # Server Setup
 
