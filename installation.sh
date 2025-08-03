@@ -39,6 +39,8 @@ if ! command -v mvn &> /dev/null; then
   sudo apt install -y maven
 fi
 
+ls
+
 # === UPDATE DOCKER COMPOSE ENV VARIABLE ===
 echo "Updating NEXT_PUBLIC_BACKEND_URL in docker-compose.yml..."
 sed -i "s|NEXT_PUBLIC_BACKEND_URL: .*|NEXT_PUBLIC_BACKEND_URL: ${LINK_VALUE}|" docker-compose.yml
