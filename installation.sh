@@ -56,14 +56,15 @@ echo "Running Docker Compose..."
 sudo docker-compose up -d --build
 
 # === WAIT FOR BACKEND TO BE AVAILABLE ===
-echo "Waiting for backend to return an empty array from /vars/get-vars..."
+echo "Waiting for backend to return an empty JSON object from /vars/get-vars..."
 
-until curl -s "${LINK_VALUE}/vars/get-vars" | grep -q '^\[\]$'; do
+until curl -s "${LINK_VALUE}/vars/get-vars" | grep -q '^{[[:space:]]*}$'; do
   echo "Waiting for backend at ${LINK_VALUE}..."
   sleep 5
 done
 
 echo "✅ Backend is up and responding."
+
 
 
 # === CALL VARIABLE APIs ===
