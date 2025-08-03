@@ -42,8 +42,8 @@ fi
 ls
 
 # === UPDATE DOCKER COMPOSE ENV VARIABLE ===
-echo "Updating NEXT_PUBLIC_BACKEND_URL in docker-compose.yml..."
-sed -i "s|NEXT_PUBLIC_BACKEND_URL: .*|NEXT_PUBLIC_BACKEND_URL: ${LINK_VALUE}|" docker-compose.yml
+echo "Updating NEXT_PUBLIC_BACKEND_URL in docker-compose.yaml..."
+sed -i "s|NEXT_PUBLIC_BACKEND_URL: .*|NEXT_PUBLIC_BACKEND_URL: ${LINK_VALUE}|" docker-compose.yaml
 
 # === BUILD THE BACKEND ===
 echo "Packaging Java backend with Maven..."
