@@ -3,21 +3,19 @@ version: "3.8"
 services:
   postgres:
     image: postgres:15
-    container_name: postgres
     environment:
       POSTGRES_DB: nx_db
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: root
-    volumes:
-      - pgdata:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
     networks:
       - app-network
 
   pgadmin:
     image: dpage/pgadmin4
-    container_name: pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: 22_9c£Q>a-[n
@@ -32,15 +30,14 @@ services:
     build:
       context: ./api
       dockerfile: Dockerfile
-    container_name: backend
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/test_db
-      SPRING_DATASOURCE_USERNAME: admin
-      SPRING_DATASOURCE_PASSWORD: root
-    depends_on:
-      - postgres
     ports:
       - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+    depends_on:
+      - postgres
     networks:
       - app-network
 
@@ -48,12 +45,10 @@ services:
     build:
       context: ./ui
       dockerfile: Dockerfile
-    container_name: frontend
-    environment:
-      NEXT_PUBLIC_BACKEND_URL: http://localhost:8080
-      NEXT_PUBLIC_IS_LOCAL: "true"
     ports:
       - "3000:3000"
+    environment:
+      NEXT_PUBLIC_BACKEND_URL: ${NEXT_PUBLIC_BACKEND_URL}
     depends_on:
       - backend
     networks:

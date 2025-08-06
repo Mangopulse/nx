@@ -1,116 +1,62 @@
-#!/bin/bash
+version: "3.8"
 
-set -e
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: nx_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: root
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
 
-# === CONFIGURABLE VALUES ===
-LINK_VALUE="${1:-http://localhost:8080}"
-SENDGRID_API_KEY="${2:-SG.123}"
-DOMAIN="newsletterx.mangopulse.net"
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: 22_9c£Q>a-[n
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - app-network
 
-# === UPDATE & INSTALL DEPENDENCIES ===
-sudo apt update
+  backend:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/nx_db
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: root
+    depends_on:
+      - postgres
+    networks:
+      - app-network
 
-# Install Docker
-if ! command -v docker &> /dev/null; then
-  echo "Installing Docker..."
-  sudo apt install -y docker.io
-  sudo systemctl enable docker
-  sudo systemctl start docker
-fi
+  frontend:
+    build:
+      context: ./ui
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_BACKEND_URL: http://localhost:8080
+    depends_on:
+      - backend
+    networks:
+      - app-network
 
-# Install Docker Compose (v2 plugin style)
-if ! command -v docker-compose &> /dev/null; then
-  echo "Installing Docker Compose..."
-  sudo apt install -y docker-compose
-fi
+volumes:
+  pgdata:
 
-# Install Java 21
-if ! java -version 2>&1 | grep '21' &> /dev/null; then
-  echo "Installing Java 21..."
-  sudo apt install -y wget unzip
-  wget https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.deb
-  sudo dpkg -i jdk-21_linux-x64_bin.deb
-  rm jdk-21_linux-x64_bin.deb
-fi
-
-# Install Maven
-if ! command -v mvn &> /dev/null; then
-  echo "Installing Maven..."
-  sudo apt install -y maven
-fi
-
-ls
-
-# === UPDATE DOCKER COMPOSE ENV VARIABLE ===
-echo "Updating NEXT_PUBLIC_BACKEND_URL in docker-compose.yaml..."
-sed -i "s|NEXT_PUBLIC_BACKEND_URL: .*|NEXT_PUBLIC_BACKEND_URL: ${LINK_VALUE}|" docker-compose.yaml
-
-# === BUILD THE BACKEND ===
-echo "Packaging Java backend with Maven..."
-cd api
-mvn clean package
-cd ..
-
-# === UPDATE .env IN FRONTEND (ui/.env) ===
-ENV_FILE="ui/.env"
-
-if [ -f "$ENV_FILE" ]; then
-  echo "Updating NEXT_PUBLIC_API in $ENV_FILE to $LINK_VALUE"
-  sed -i "s|^NEXT_PUBLIC_API=.*|NEXT_PUBLIC_API=${LINK_VALUE}|" "$ENV_FILE"
-else
-  echo "⚠️ $ENV_FILE not found. Skipping .env update."
-fi
-
-# === RUN DOCKER COMPOSE ===
-echo "Running Docker Compose..."
-sudo docker-compose up -d --build
-
-# === WAIT FOR BACKEND TO BE AVAILABLE ===
-echo "Waiting for backend to return an empty JSON object from /vars/get-vars..."
-
-until curl -s "${LINK_VALUE}/vars/get-vars" | grep -q '^{[[:space:]]*}$'; do
-  echo "Waiting for backend at ${LINK_VALUE}..."
-  sleep 5
-done
-
-echo "✅ Backend is up and responding."
-
-
-
-# === CALL VARIABLE APIs ===
-echo "Updating backend variables..."
-curl -s "${LINK_VALUE}/vars/update-var?key=LINK&value=${LINK_VALUE}"
-echo ""
-curl -s "${LINK_VALUE}/vars/update-var?key=SENDGRID_API_KEY&value=${SENDGRID_API_KEY}"
-echo ""
-curl -s "${LINK_VALUE}/vars/refresh-vars"
-echo ""
-
-# === INSTALL & CONFIGURE NGINX ===
-echo "Installing Nginx..."
-sudo apt install -y nginx
-
-echo "Configuring Nginx for domain $DOMAIN..."
-
-NGINX_CONF="/etc/nginx/sites-available/$DOMAIN"
-
-sudo bash -c "cat > $NGINX_CONF" <<EOF
-server {
-    listen 80;
-    server_name $DOMAIN;
-
-    location / {
-        proxy_pass http://localhost:3000;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade \$http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host \$host;
-        proxy_cache_bypass \$http_upgrade;
-    }
-}
-EOF
-
-sudo ln -sf "$NGINX_CONF" "/etc/nginx/sites-enabled/$DOMAIN"
-sudo nginx -t && sudo systemctl restart nginx
-
-echo "✅ Deployment complete. Frontend is mapped to: http://$DOMAIN"
+networks:
+  app-network:
+    driver: bridge
