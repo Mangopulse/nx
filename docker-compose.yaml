@@ -5,7 +5,7 @@ services:
     image: postgres:15
     container_name: postgres
     environment:
-      POSTGRES_DB: test_db
+      POSTGRES_DB: nx_db
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: root
     volumes:
@@ -20,7 +20,7 @@ services:
     container_name: pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_DEFAULT_PASSWORD: 22_9c£Q>a-[n
     ports:
       - "5050:80"
     depends_on:
