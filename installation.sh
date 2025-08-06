@@ -1,11 +1,22 @@
 #!/bin/bash
-
 set -e
 
-# === CONFIGURABLE VALUES ===
-LINK_VALUE="${1:-http://localhost:8080}"
-SENDGRID_API_KEY="${2:-SG.123}"
-DOMAIN="newsletterx.mangopulse.net"
+# === LOAD ENV VARIABLES FROM .env ===
+if [ -f .env ]; then
+  echo "📥 Loading environment from .env"
+  set -a
+  source .env
+  set +a
+else
+  echo "❌ .env file not found. Please create one in the root directory."
+  exit 1
+fi
+
+# === CHECK REQUIRED VARIABLES ===
+if [[ -z "$LINK_VALUE" || -z "$SENDGRID_API_KEY" || -z "$DOMAIN" ]]; then
+  echo "❌ Missing required env variables. Please check .env file."
+  exit 1
+fi
 
 # === UPDATE & INSTALL DEPENDENCIES ===
 echo "📦 Updating apt..."
