@@ -8,73 +8,85 @@ SENDGRID_API_KEY="${2:-SG.123}"
 DOMAIN="newsletterx.mangopulse.net"
 
 # === UPDATE & INSTALL DEPENDENCIES ===
+echo "📦 Updating apt..."
 sudo apt update
 
-# Install Docker
+# === Install Docker ===
 if ! command -v docker &> /dev/null; then
-  echo "Installing Docker..."
-  sudo apt install -y docker.io
+  echo "🐳 Installing Docker..."
+  sudo apt remove -y docker docker-engine docker.io containerd runc || true
+  sudo apt install -y ca-certificates curl gnupg
+  sudo install -m 0755 -d /etc/apt/keyrings
+  curl -fsSL https://download.docker.com/linux/debian/gpg | \
+    sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+  sudo chmod a+r /etc/apt/keyrings/docker.gpg
+  echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian bookworm stable" | \
+    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  sudo apt update
+  sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
   sudo systemctl enable docker
   sudo systemctl start docker
+else
+  echo "✅ Docker already installed."
 fi
 
-# Install Docker Compose (plugin style)
-if ! docker compose version &> /dev/null; then
-  echo "Installing Docker Compose plugin..."
-  sudo apt install -y docker-compose-plugin
-fi
-
-# Install Node.js 18
+# === Install Node.js 18 ===
 if ! command -v node &> /dev/null || ! node -v | grep -q 'v18'; then
-  echo "Installing Node.js 18..."
+  echo "🟢 Installing Node.js 18..."
   curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
   sudo apt install -y nodejs
+else
+  echo "✅ Node.js 18 already installed."
 fi
 
-# Install Java 21
+# === Install Java 21 ===
 if ! java -version 2>&1 | grep '21' &> /dev/null; then
-  echo "Installing Java 21..."
+  echo "☕ Installing Java 21..."
   sudo apt install -y wget unzip
   wget https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.deb
   sudo dpkg -i jdk-21_linux-x64_bin.deb
   rm jdk-21_linux-x64_bin.deb
+else
+  echo "✅ Java 21 already installed."
 fi
 
-# Install Maven
+# === Install Maven ===
 if ! command -v mvn &> /dev/null; then
-  echo "Installing Maven..."
+  echo "📦 Installing Maven..."
   sudo apt install -y maven
+else
+  echo "✅ Maven already installed."
 fi
 
 # === BUILD BACKEND ===
-echo "Building Java backend..."
+echo "🛠 Building Java backend..."
 cd api
 mvn clean package -DskipTests
 cd ..
 
 # === BUILD FRONTEND ===
-echo "Building Next.js frontend..."
+echo "🧱 Building Next.js frontend..."
 cd ui
 npm install
 npm run build
 cd ..
 
-# === RUN DOCKER COMPOSE ===
-echo "Running Docker Compose..."
+# === START SERVICES ===
+echo "🐳 Running Docker Compose..."
 docker compose up -d --build
 
 # === WAIT FOR BACKEND TO BE AVAILABLE ===
-echo "Waiting for backend to return an empty JSON object from /vars/get-vars..."
+echo "⏳ Waiting for backend to return an empty JSON object from /vars/get-vars..."
 
 until curl -s "${LINK_VALUE}/vars/get-vars" | grep -q '^{[[:space:]]*}$'; do
-  echo "Waiting for backend at ${LINK_VALUE}..."
+  echo "⏳ Waiting for backend at ${LINK_VALUE}..."
   sleep 5
 done
 
 echo "✅ Backend is up and responding."
 
 # === CALL VARIABLE APIs ===
-echo "Updating backend variables..."
+echo "🔁 Updating backend variables..."
 curl -s "${LINK_VALUE}/vars/update-var?key=LINK&value=${LINK_VALUE}"
 echo ""
 curl -s "${LINK_VALUE}/vars/update-var?key=SENDGRID_API_KEY&value=${SENDGRID_API_KEY}"
@@ -83,10 +95,10 @@ curl -s "${LINK_VALUE}/vars/refresh-vars"
 echo ""
 
 # === INSTALL & CONFIGURE NGINX ===
-echo "Installing Nginx..."
+echo "🌐 Installing NGINX..."
 sudo apt install -y nginx
 
-echo "Configuring Nginx for domain $DOMAIN..."
+echo "🔧 Configuring NGINX for domain $DOMAIN..."
 
 NGINX_CONF="/etc/nginx/sites-available/$DOMAIN"
 
