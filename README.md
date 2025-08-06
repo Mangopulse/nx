@@ -89,7 +89,7 @@ chmod +x installation.sh
 run the installation script to 
 
 ```bash
-./setup.sh "http://localhost:8080" "SG.your-key-here"
+./installation.sh "http://localhost:8080" "SG.your-key-here"
 ```
 
 The installation script do the below 
