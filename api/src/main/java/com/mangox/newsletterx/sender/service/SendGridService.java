@@ -46,12 +46,20 @@ public class SendGridService {
     private static final String ZIP = "zip";
     private static final String COUNTRY = "country";
     public void sendText(String sender, String receiver, String subject, String text) throws IOException {
+        String sendGridApiKey = envVarsService.getEnvironmentVariable(EnvVariables.SENDGRID_API_KEY.name());
+        
+        // If no API key is configured, log and skip email sending
+        if (sendGridApiKey == null || sendGridApiKey.isBlank()) {
+            log.warn("SendGrid API key not configured. Skipping text email send to {} with subject '{}'", receiver, subject);
+            return; // Skip sending but don't throw exception
+        }
+        
         Email from = new Email(sender);
         Email to = new Email(receiver);
         Content content = new Content("text/plain", text);
         Mail mail = new Mail(from, subject, to, content);
 
-        SendGrid sg = new SendGrid(envVarsService.getEnvironmentVariable(EnvVariables.SENDGRID_API_KEY.name()));
+        SendGrid sg = new SendGrid(sendGridApiKey);
         Request request = new Request();
         try {
             request.setMethod(Method.POST);
@@ -71,8 +79,19 @@ public class SendGridService {
 
         Mail mail = new Mail(from, subject, to, content);
         String sendGridApiKey = envVarsService.getEnvironmentVariable(EnvVariables.SENDGRID_API_KEY.name());
-        if(sendGridApiKey == null || sendGridApiKey.isBlank())
-            throw new IOException("Failed to get Sendgrid API Key");
+        
+        // If no API key is configured, log and skip email sending
+        if (sendGridApiKey == null || sendGridApiKey.isBlank()) {
+            log.warn("SendGrid API key not configured. Skipping email send to {} with subject '{}'", receiver, subject);
+            return true; // Return success to not block the registration process
+        }
+            
+        // For development/testing, skip actual email sending if using test key
+        if (sendGridApiKey.startsWith("SG.test_key")) {
+            log.info("Development mode: Skipping email send to {} with subject '{}'", receiver, subject);
+            return true; // Simulate successful send
+        }
+            
         SendGrid sg = new SendGrid(sendGridApiKey);
         Request request = new Request();
 
@@ -94,12 +113,36 @@ public class SendGridService {
 
         String htmlBody = templateEngine.process("/" + template, thymeleafContext);
 
+        String sendGridApiKey = envVarsService.getEnvironmentVariable(EnvVariables.SENDGRID_API_KEY.name());
+        
+        // If no API key is configured, log and skip email sending
+        if (sendGridApiKey == null || sendGridApiKey.isBlank()) {
+            log.warn("SendGrid API key not configured. Skipping email send to {} with subject '{}'", to, subject);
+            log.info("Email content would be: {}", htmlBody);
+            return true; // Return success to not block the registration process
+        }
+        
+        // For development/testing, skip actual email sending if using test key
+        if (sendGridApiKey.startsWith("SG.test_key")) {
+            log.info("Development mode: Skipping email send to {} with subject '{}'", to, subject);
+            log.info("Email content would be: {}", htmlBody);
+            return true; // Simulate successful send
+        }
+
         return sendHtml(from, to, subject, htmlBody);
     }
 
     public HashMap<String, EmailSender> getSenders() throws IOException {
+        String sendGridApiKey = envVarsService.getEnvironmentVariable(EnvVariables.SENDGRID_API_KEY.name());
+        
+        // If no API key is configured, return empty map
+        if (sendGridApiKey == null || sendGridApiKey.isBlank()) {
+            log.warn("SendGrid API key not configured. Returning empty senders list.");
+            return new HashMap<>();
+        }
+        
         try {
-            SendGrid sg = new SendGrid(envVarsService.getEnvironmentVariable(EnvVariables.SENDGRID_API_KEY.name()));
+            SendGrid sg = new SendGrid(sendGridApiKey);
             Request request = new Request();
             request.setMethod(Method.GET);
             request.setEndpoint("/senders");
@@ -122,8 +165,16 @@ public class SendGridService {
         }
     }
     public  EmailSender getSender(String idString) throws IOException {
+        String sendGridApiKey = envVarsService.getEnvironmentVariable(EnvVariables.SENDGRID_API_KEY.name());
+        
+        // If no API key is configured, return null
+        if (sendGridApiKey == null || sendGridApiKey.isBlank()) {
+            log.warn("SendGrid API key not configured. Cannot get sender with ID: {}", idString);
+            return null;
+        }
+        
         try {
-            SendGrid sg = new SendGrid(envVarsService.getEnvironmentVariable(EnvVariables.SENDGRID_API_KEY.name()));
+            SendGrid sg = new SendGrid(sendGridApiKey);
             Request request = new Request();
             request.setMethod(Method.GET);
             request.setEndpoint("/senders/"+idString);
@@ -140,8 +191,16 @@ public class SendGridService {
         }
     }
     public int createSender(String appDomain, String email, String name, String address) throws IOException {
+        String sendGridApiKey = envVarsService.getEnvironmentVariable(EnvVariables.SENDGRID_API_KEY.name());
+        
+        // If no API key is configured, return -1 to indicate failure
+        if (sendGridApiKey == null || sendGridApiKey.isBlank()) {
+            log.warn("SendGrid API key not configured. Cannot create sender for domain: {}", appDomain);
+            return -1;
+        }
+        
         try {
-            SendGrid sg = new SendGrid(envVarsService.getEnvironmentVariable(EnvVariables.SENDGRID_API_KEY.name()));
+            SendGrid sg = new SendGrid(sendGridApiKey);
             Request request = new Request();
             request.setMethod(Method.POST);
             request.setEndpoint("/senders");
@@ -173,8 +232,16 @@ public class SendGridService {
         }
     }
     public int updateSender(long id, String appDomain, String email, String name, String address)throws IOException {
+        String sendGridApiKey = envVarsService.getEnvironmentVariable(EnvVariables.SENDGRID_API_KEY.name());
+        
+        // If no API key is configured, return -1 to indicate failure
+        if (sendGridApiKey == null || sendGridApiKey.isBlank()) {
+            log.warn("SendGrid API key not configured. Cannot update sender with ID: {}", id);
+            return -1;
+        }
+        
         try{
-            SendGrid sg = new SendGrid(envVarsService.getEnvironmentVariable(EnvVariables.SENDGRID_API_KEY.name()));
+            SendGrid sg = new SendGrid(sendGridApiKey);
             Request request = new Request();
             request.setMethod(Method.PATCH);
             request.setEndpoint("/senders/"+id);

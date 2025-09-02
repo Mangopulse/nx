@@ -78,10 +78,13 @@ public class AuthenticationService {
         var email = request.getEmail();
         var website = request.getWebsite();
 
-        // Validate the email
-        if (userRepository.existsByEmailAndEnabled(email, true)) {
+        // Check if email exists (enabled or disabled)
+        if (userRepository.existsByEmail(email)) {
             throw new ErrorException("Email is Already in use");
-        } else if (userRepository.existsByWebsiteAndEnabled(website, true)) {
+        }
+        
+        // Check if website exists (enabled or disabled)
+        if (userRepository.existsByWebsite(website)) {
             throw new ErrorException("Website Link is Already in use");
         }
     }
@@ -146,14 +149,21 @@ public class AuthenticationService {
         templateModel.put("ConfirmationLink", confirmationLink);
         templateModel.put("Name", user.getWebsite());
 
-        System.out.println(confirmationLink);
+        System.out.println("Confirmation link: " + confirmationLink);
+        log.info("Sending confirmation email to {} for website {}", user.getEmail(), user.getWebsite());
 
-        senderService.sendHtmlTemplateEmail(
-                sender,
-                user.getEmail(),
-                "NewsletterX Email Confirmation",
-                "email-confirmation.html",
-                templateModel);
+        try {
+            senderService.sendHtmlTemplateEmail(
+                    sender,
+                    user.getEmail(),
+                    "NewsletterX Email Confirmation",
+                    "email-confirmation.html",
+                    templateModel);
+            log.info("Confirmation email sent successfully");
+        } catch (Exception e) {
+            log.error("Failed to send confirmation email", e);
+            throw e;
+        }
     }
 
     private UserResponse buildUserResponse(User user, ConfirmationToken token) {

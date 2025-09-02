@@ -47,7 +47,7 @@ public class AuthenticationController {
                     HttpStatus.BAD_REQUEST);
 
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error("Registration failed with exception: ", e);
             e.printStackTrace();
             return new ResponseEntity<>(
                     new ErrorResponse(HttpStatus.BAD_REQUEST,
