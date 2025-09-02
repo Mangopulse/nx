@@ -73,7 +73,7 @@ public class SimpleAuthTest {
     }
 
     @Test
-    @DisplayName("Should fail registration with duplicate email")
+    @DisplayName("Should allow registration with duplicate email (updates disabled user)")
     public void testUserRegistration_DuplicateEmail() throws Exception {
         // First registration
         long timestamp1 = System.currentTimeMillis();
@@ -98,12 +98,13 @@ public class SimpleAuthTest {
         mockMvc.perform(post("/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(request2)))
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.errorMessage").value("Email is Already in use"));
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.email").value("duplicate-" + timestamp1 + "@example.com"))
+                .andExpect(jsonPath("$.website").value("site2-" + timestamp1 + ".com"));
     }
 
     @Test
-    @DisplayName("Should fail registration with duplicate website")
+    @DisplayName("Should allow registration with duplicate website (updates disabled user)")
     public void testUserRegistration_DuplicateWebsite() throws Exception {
         // First registration
         long timestamp = System.currentTimeMillis();
@@ -128,8 +129,9 @@ public class SimpleAuthTest {
         mockMvc.perform(post("/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(request2)))
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.errorMessage").value("Website Link is Already in use"));
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.email").value("user2-" + timestamp + "@example.com"))
+                .andExpect(jsonPath("$.website").value("duplicate-" + timestamp + ".com"));
     }
 
     @Test
