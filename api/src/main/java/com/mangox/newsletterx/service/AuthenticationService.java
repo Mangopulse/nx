@@ -78,13 +78,10 @@ public class AuthenticationService {
         var email = request.getEmail();
         var website = request.getWebsite();
 
-        // Check if email exists (enabled or disabled)
-        if (userRepository.existsByEmail(email)) {
+        // Validate the email - only block if enabled user exists
+        if (userRepository.existsByEmailAndEnabled(email, true)) {
             throw new ErrorException("Email is Already in use");
-        }
-        
-        // Check if website exists (enabled or disabled)
-        if (userRepository.existsByWebsite(website)) {
+        } else if (userRepository.existsByWebsiteAndEnabled(website, true)) {
             throw new ErrorException("Website Link is Already in use");
         }
     }
