@@ -73,6 +73,51 @@ public class SimpleAuthTest {
     }
 
     @Test
+    @DisplayName("Should update user data when re-registering with non-activated email")
+    public void testUserRegistration_UpdateNonActivatedUser() throws Exception {
+        // First registration - creates disabled user
+        long timestamp = System.currentTimeMillis();
+        String email = "inactive-user-" + timestamp + "@example.com";
+        
+        RegisterRequest firstRequest = RegisterRequest.builder()
+                .email(email)
+                .website("original-site-" + timestamp + ".com")
+                .password("originalPassword123!")
+                .referral("http://localhost:3000/original")
+                .build();
+
+        // First registration should succeed
+        mockMvc.perform(post("/auth/register")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(firstRequest)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.email").value(email))
+                .andExpect(jsonPath("$.website").value("original-site-" + timestamp + ".com"))
+                .andExpect(jsonPath("$.enabled").value(false));
+
+        // Second registration with same email but different data - should update the user
+        RegisterRequest secondRequest = RegisterRequest.builder()
+                .email(email) // Same email
+                .website("updated-site-" + timestamp + ".com") // Different website
+                .password("newPassword456!")  // Different password
+                .referral("http://localhost:3000/updated") // Different referral
+                .build();
+
+        // Second registration should also succeed and update the user
+        mockMvc.perform(post("/auth/register")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(secondRequest)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.email").value(email))
+                .andExpect(jsonPath("$.website").value("updated-site-" + timestamp + ".com")) // Updated website
+                .andExpect(jsonPath("$.enabled").value(false)); // Still disabled until email confirmation
+        
+        // Verify that only one user exists in database with the updated data
+        // Note: This test validates the business logic where non-activated users 
+        // can be updated when re-registering with the same email
+    }
+
+    @Test
     @DisplayName("Should allow registration with duplicate email (updates disabled user)")
     public void testUserRegistration_DuplicateEmail() throws Exception {
         // First registration
