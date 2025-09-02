@@ -1,6 +1,7 @@
 package com.mangox.newsletterx;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mangox.newsletterx.model.enums.RegistrationMessage;
 import com.mangox.newsletterx.model.request.AuthenticationRequest;
 import com.mangox.newsletterx.model.request.RegisterRequest;
 import org.junit.jupiter.api.BeforeEach;
@@ -69,7 +70,8 @@ public class SimpleAuthTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.email").value(uniqueEmail))
                 .andExpect(jsonPath("$.website").value(uniqueWebsite))
-                .andExpect(jsonPath("$.enabled").value(false));
+                .andExpect(jsonPath("$.enabled").value(false))
+                .andExpect(jsonPath("$.message").value(RegistrationMessage.CONFIRMATION_LINK_SENT.getMessage()));
     }
 
     @Test
@@ -93,7 +95,8 @@ public class SimpleAuthTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.email").value(email))
                 .andExpect(jsonPath("$.website").value("original-site-" + timestamp + ".com"))
-                .andExpect(jsonPath("$.enabled").value(false));
+                .andExpect(jsonPath("$.enabled").value(false))
+                .andExpect(jsonPath("$.message").value(RegistrationMessage.CONFIRMATION_LINK_SENT.getMessage()));
 
         // Second registration with same email but different data - should update the user
         RegisterRequest secondRequest = RegisterRequest.builder()
@@ -110,7 +113,8 @@ public class SimpleAuthTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.email").value(email))
                 .andExpect(jsonPath("$.website").value("updated-site-" + timestamp + ".com")) // Updated website
-                .andExpect(jsonPath("$.enabled").value(false)); // Still disabled until email confirmation
+                .andExpect(jsonPath("$.enabled").value(false)) // Still disabled until email confirmation
+                .andExpect(jsonPath("$.message").value(RegistrationMessage.ACCOUNT_UPDATED.getMessage()));
         
         // Verify that only one user exists in database with the updated data
         // Note: This test validates the business logic where non-activated users 
@@ -131,7 +135,8 @@ public class SimpleAuthTest {
         mockMvc.perform(post("/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(request1)))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.message").value(RegistrationMessage.CONFIRMATION_LINK_SENT.getMessage()));
 
         // Try duplicate email with different website
         RegisterRequest request2 = RegisterRequest.builder()
@@ -145,7 +150,8 @@ public class SimpleAuthTest {
                         .content(asJsonString(request2)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.email").value("duplicate-" + timestamp1 + "@example.com"))
-                .andExpect(jsonPath("$.website").value("site2-" + timestamp1 + ".com"));
+                .andExpect(jsonPath("$.website").value("site2-" + timestamp1 + ".com"))
+                .andExpect(jsonPath("$.message").value(RegistrationMessage.ACCOUNT_UPDATED.getMessage()));
     }
 
     @Test

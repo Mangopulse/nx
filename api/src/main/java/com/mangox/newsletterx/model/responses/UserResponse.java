@@ -17,4 +17,5 @@ public class UserResponse {
     Boolean enabled;
     List<Object> walkthrough;
     String confirmationLink;
+    String message;
 }

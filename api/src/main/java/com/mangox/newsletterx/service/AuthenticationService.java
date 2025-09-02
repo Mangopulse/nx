@@ -6,6 +6,7 @@ import com.mangox.newsletterx.helper.AuthenticationHelper;
 import com.mangox.newsletterx.helper.StaticFileHelper;
 import com.mangox.newsletterx.model.entities.*;
 import com.mangox.newsletterx.model.enums.EnvVariables;
+import com.mangox.newsletterx.model.enums.RegistrationMessage;
 import com.mangox.newsletterx.model.enums.Role;
 import com.mangox.newsletterx.model.enums.TokenType;
 import com.mangox.newsletterx.model.request.AdminAuthenticateRequest;
@@ -67,10 +68,26 @@ public class AuthenticationService {
      */
     public UserResponse register(RegisterRequest request) throws Exception {
         validateRequest(request);
+        
+        // Check if user already exists to determine the appropriate message
+        Optional<User> existingUser = userRepository.findByEmail(request.getEmail());
+        boolean isExistingUser = existingUser.isPresent() && !existingUser.get().isEnabled();
+        
         User user = processUserRegistration(request);
         ConfirmationToken confirmationToken = createConfirmationToken(user);
-        sendConfirmationEmail(user, confirmationToken);
-        return buildUserResponse(user, confirmationToken);
+        
+        // Try to send confirmation email and determine the appropriate message
+        RegistrationMessage message;
+        try {
+            sendConfirmationEmail(user, confirmationToken);
+            message = isExistingUser ? RegistrationMessage.ACCOUNT_UPDATED : RegistrationMessage.CONFIRMATION_LINK_SENT;
+        } catch (Exception e) {
+            log.error("Failed to send confirmation email for user: {}", user.getEmail(), e);
+            message = RegistrationMessage.EMAIL_SEND_ERROR;
+            // Don't throw the exception - registration was successful, just email failed
+        }
+        
+        return buildUserResponse(user, confirmationToken, message);
     }
 
     private void validateRequest(RegisterRequest request) throws ErrorException {
@@ -163,11 +180,12 @@ public class AuthenticationService {
         }
     }
 
-    private UserResponse buildUserResponse(User user, ConfirmationToken token) {
+    private UserResponse buildUserResponse(User user, ConfirmationToken token, RegistrationMessage registrationMessage) {
         UserResponse response = UserResponse.builder()
                 .email(user.getEmail())
                 .website(user.getWebsite())
                 .enabled(user.isEnabled())
+                .message(registrationMessage.getMessage())
                 .build();
 
         // If not in production, include the confirmation link
