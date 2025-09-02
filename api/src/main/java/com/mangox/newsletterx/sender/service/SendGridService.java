@@ -78,12 +78,19 @@ public class SendGridService {
         Content content = new Content("text/html", htmlBody);
 
         Mail mail = new Mail(from, subject, to, content);
+        String skipEmailService = envVarsService.getEnvironmentVariable(EnvVariables.SKIP_EMAIL_SERVICE.name());
         String sendGridApiKey = envVarsService.getEnvironmentVariable(EnvVariables.SENDGRID_API_KEY.name());
         
-        // If no API key is configured, log and skip email sending
+        // If SKIP_EMAIL_SERVICE is true, skip email sending but return success
+        if ("true".equalsIgnoreCase(skipEmailService)) {
+            log.info("SKIP_EMAIL_SERVICE is enabled. Skipping email send to {} with subject '{}'", receiver, subject);
+            return true; // Return success to continue the flow
+        }
+        
+        // If no API key is configured and SKIP_EMAIL_SERVICE is not true, return false to indicate SendGrid not configured
         if (sendGridApiKey == null || sendGridApiKey.isBlank()) {
-            log.warn("SendGrid API key not configured. Skipping email send to {} with subject '{}'", receiver, subject);
-            return true; // Return success to not block the registration process
+            log.warn("SendGrid API key not configured and SKIP_EMAIL_SERVICE is not enabled. Cannot send email to {} with subject '{}'", receiver, subject);
+            return false; // Return false to indicate SendGrid not configured
         }
             
         // For development/testing, skip actual email sending if using test key
@@ -113,13 +120,21 @@ public class SendGridService {
 
         String htmlBody = templateEngine.process("/" + template, thymeleafContext);
 
+        String skipEmailService = envVarsService.getEnvironmentVariable(EnvVariables.SKIP_EMAIL_SERVICE.name());
         String sendGridApiKey = envVarsService.getEnvironmentVariable(EnvVariables.SENDGRID_API_KEY.name());
         
-        // If no API key is configured, log and skip email sending
-        if (sendGridApiKey == null || sendGridApiKey.isBlank()) {
-            log.warn("SendGrid API key not configured. Skipping email send to {} with subject '{}'", to, subject);
+        // If SKIP_EMAIL_SERVICE is true, skip email sending but return success
+        if ("true".equalsIgnoreCase(skipEmailService)) {
+            log.info("SKIP_EMAIL_SERVICE is enabled. Skipping email send to {} with subject '{}'", to, subject);
             log.info("Email content would be: {}", htmlBody);
-            return true; // Return success to not block the registration process
+            return true; // Return success to continue the flow
+        }
+        
+        // If no API key is configured and SKIP_EMAIL_SERVICE is not true, return false to indicate SendGrid not configured
+        if (sendGridApiKey == null || sendGridApiKey.isBlank()) {
+            log.warn("SendGrid API key not configured and SKIP_EMAIL_SERVICE is not enabled. Cannot send email to {} with subject '{}'", to, subject);
+            log.info("Email content would be: {}", htmlBody);
+            return false; // Return false to indicate SendGrid not configured
         }
         
         // For development/testing, skip actual email sending if using test key

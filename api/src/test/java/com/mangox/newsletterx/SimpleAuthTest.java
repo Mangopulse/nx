@@ -2,6 +2,7 @@ package com.mangox.newsletterx;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mangox.newsletterx.model.enums.RegistrationMessage;
+import com.mangox.newsletterx.model.enums.EnvVariables;
 import com.mangox.newsletterx.model.request.AuthenticationRequest;
 import com.mangox.newsletterx.model.request.RegisterRequest;
 import org.junit.jupiter.api.BeforeEach;
@@ -68,6 +69,7 @@ public class SimpleAuthTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(request)))
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$.code").value(200))
                 .andExpect(jsonPath("$.email").value(uniqueEmail))
                 .andExpect(jsonPath("$.website").value(uniqueWebsite))
                 .andExpect(jsonPath("$.enabled").value(false))

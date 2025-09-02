@@ -1,5 +1,6 @@
 package com.mangox.newsletterx.model.responses;
 
+import com.mangox.newsletterx.model.responses.main.SuperResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +12,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserResponse {
+public class UserResponse extends SuperResponse {
     String email;
     String website;
     Boolean enabled;

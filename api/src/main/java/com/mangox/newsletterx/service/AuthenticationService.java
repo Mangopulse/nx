@@ -79,12 +79,19 @@ public class AuthenticationService {
         // Try to send confirmation email and determine the appropriate message
         RegistrationMessage message;
         try {
-            sendConfirmationEmail(user, confirmationToken);
-            message = isExistingUser ? RegistrationMessage.ACCOUNT_UPDATED : RegistrationMessage.CONFIRMATION_LINK_SENT;
+            boolean emailSent = sendConfirmationEmail(user, confirmationToken);
+            if (emailSent) {
+                message = isExistingUser ? RegistrationMessage.ACCOUNT_UPDATED : RegistrationMessage.CONFIRMATION_LINK_SENT;
+            } else {
+                // SendGrid is not configured and SKIP_EMAIL_SERVICE is not enabled - throw error
+                throw new ErrorException(RegistrationMessage.SENDGRID_NOT_CONFIGURED.getMessage());
+            }
+        } catch (ErrorException e) {
+            // Re-throw ErrorException to return proper error response
+            throw e;
         } catch (Exception e) {
             log.error("Failed to send confirmation email for user: {}", user.getEmail(), e);
-            message = RegistrationMessage.EMAIL_SEND_ERROR;
-            // Don't throw the exception - registration was successful, just email failed
+            throw new ErrorException(RegistrationMessage.EMAIL_SEND_ERROR.getMessage());
         }
         
         return buildUserResponse(user, confirmationToken, message);
@@ -156,10 +163,17 @@ public class AuthenticationService {
         return confirmationTokenRepository.save(token);
     }
 
-    private void sendConfirmationEmail(User user, ConfirmationToken token) throws IOException {
+    private boolean sendConfirmationEmail(User user, ConfirmationToken token) throws IOException {
         Map<String, Object> templateModel = new HashMap<>();
-        String confirmationLink = envVarsService.getEnvironmentVariable(EnvVariables.LINK.name())
-                + "/auth/confirm-email?token=" + token.getToken();
+        
+        // Get base URL, fallback to localhost if not configured
+        String baseUrl = envVarsService.getEnvironmentVariable(EnvVariables.LINK.name());
+        if (baseUrl == null || baseUrl.isEmpty()) {
+            baseUrl = "http://localhost:8080"; // Default fallback
+            log.warn("LINK environment variable not configured, using fallback: {}", baseUrl);
+        }
+        
+        String confirmationLink = baseUrl + "/auth/confirm-email?token=" + token.getToken();
         templateModel.put("ConfirmationLink", confirmationLink);
         templateModel.put("Name", user.getWebsite());
 
@@ -167,13 +181,20 @@ public class AuthenticationService {
         log.info("Sending confirmation email to {} for website {}", user.getEmail(), user.getWebsite());
 
         try {
-            senderService.sendHtmlTemplateEmail(
+            boolean emailSent = senderService.sendHtmlTemplateEmail(
                     sender,
                     user.getEmail(),
                     "NewsletterX Email Confirmation",
                     "email-confirmation.html",
                     templateModel);
-            log.info("Confirmation email sent successfully");
+            
+            if (emailSent) {
+                log.info("Confirmation email sent successfully");
+            } else {
+                log.warn("Email sending failed - SendGrid not configured");
+            }
+            
+            return emailSent;
         } catch (Exception e) {
             log.error("Failed to send confirmation email", e);
             throw e;
@@ -191,8 +212,12 @@ public class AuthenticationService {
         // If not in production, include the confirmation link
         if (!"prod".equalsIgnoreCase(activeProfile)) {
             try {
-                String confirmationLink = envVarsService.getEnvironmentVariable(EnvVariables.LINK.name())
-                        + "/auth/confirm-email?token=" + token.getToken();
+                // Get base URL, fallback to localhost if not configured
+                String baseUrl = envVarsService.getEnvironmentVariable(EnvVariables.LINK.name());
+                if (baseUrl == null || baseUrl.isEmpty()) {
+                    baseUrl = "http://localhost:8080"; // Default fallback
+                }
+                String confirmationLink = baseUrl + "/auth/confirm-email?token=" + token.getToken();
                 response.setConfirmationLink(confirmationLink);
             } catch (Exception e) {
                 log.error("Failed to generate confirmation link", e);
