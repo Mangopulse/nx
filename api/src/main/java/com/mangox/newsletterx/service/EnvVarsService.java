@@ -30,8 +30,11 @@ public class EnvVarsService {
             log.info("Initializing environment variables from database...");
             initializrVariables();
             log.info("Environment variables initialized. Found {} variables", variablesMap.size());
+            if (variablesMap.isEmpty()) {
+                log.info("No variables found in database. System environment variables will be used when present.");
+            }
         } catch (Exception e) {
-            log.error("Failed to initialize environment variables on startup", e);
+            log.error("Failed to initialize environment variables from database. System environment variables will be used when present.", e);
         }
     }
 
@@ -42,28 +45,21 @@ public class EnvVarsService {
     }
 
     public String getEnvironmentVariable(String key) {
-        // 1. Check database first (for runtime configuration)
-        String dbValue = getDatabaseValue(key);
-        if (dbValue != null && !dbValue.isEmpty() && !"null".equals(dbValue)) {
-            log.debug("Found variable '{}' in database: {}", key, dbValue);
-            return dbValue;
-        }
-        
-        // 2. Fallback to system environment variables
+        // 1. Check system environment variables first (env file / container env)
         String envValue = System.getenv(key);
         if (envValue != null && !envValue.isEmpty()) {
-            log.debug("Found variable '{}' in system environment: {}", key, envValue);
+            log.debug("Found variable '{}' in system environment: {}", key, maskIfSensitive(key, envValue));
             return envValue;
         }
-        
-        // 3. Check application.properties (through Spring Environment)
-        String propValue = getApplicationPropertyValue(key);
-        if (propValue != null && !propValue.isEmpty()) {
-            log.debug("Found variable '{}' in application properties: {}", key, propValue);
-            return propValue;
+
+        // 2. Fallback to database (runtime configuration)
+        String dbValue = getDatabaseValue(key);
+        if (dbValue != null && !dbValue.isEmpty() && !"null".equals(dbValue)) {
+            log.debug("Found variable '{}' in database: {}", key, maskIfSensitive(key, dbValue));
+            return dbValue;
         }
-        
-        log.debug("Variable '{}' not found in any source", key);
+
+        log.debug("Variable '{}' not found in env or database", key);
         return null;
     }
     
@@ -100,38 +96,17 @@ public class EnvVarsService {
     public void refreshMap() {
         initializrVariables();
     }
+    
+    /**
+     * Initialize required environment variables if they don't exist
+     */
+    public void initializeRequiredVariables() { /* no-op: do not seed DB defaults */ }
 
     public HashMap<String, String> getVariables() {
         return variablesMap;
     }
     
-    private String getApplicationPropertyValue(String key) {
-        // First try to get the property directly
-        String directValue = environment.getProperty(key);
-        if (directValue != null && !directValue.isEmpty()) {
-            return directValue;
-        }
-        
-        // Then try our default mappings
-        String defaultKey = null;
-        switch (key) {
-            case "LINK":
-                defaultKey = "app.default.link";
-                break;
-            case "SENDGRID_API_KEY":
-                defaultKey = "app.default.sendgrid-api-key";
-                break;
-            case "SKIP_EMAIL_SERVICE":
-                defaultKey = "app.default.skip-email-service";
-                break;
-        }
-        
-        if (defaultKey != null) {
-            return environment.getProperty(defaultKey);
-        }
-        
-        return null;
-    }
+    private String getApplicationPropertyValue(String key) { return null; }
     
     /**
      * Get variable from all sources for debugging purposes
@@ -147,12 +122,20 @@ public class EnvVarsService {
         String envValue = System.getenv(key);
         result.append("ENV: ").append(envValue != null ? envValue : "null").append(", ");
         
-        // Check application properties
-        String propValue = getApplicationPropertyValue(key);
-        result.append("PROPS: ").append(propValue != null ? propValue : "null");
+        // Application properties disabled as a source
+        String propValue = null;
+        result.append("PROPS: null");
         
         log.info("Variable '{}' sources: {}", key, result.toString());
         return getEnvironmentVariable(key); // Return actual resolved value
+    }
+
+    private String maskIfSensitive(String key, String value) {
+        if (key != null && key.toUpperCase().contains("KEY")) {
+            if (value.length() <= 4) return "****";
+            return value.substring(0, Math.min(6, value.length())) + "****";
+        }
+        return value;
     }
 
 }

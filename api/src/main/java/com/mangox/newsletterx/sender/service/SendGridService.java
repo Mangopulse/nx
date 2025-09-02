@@ -110,6 +110,7 @@ public class SendGridService {
             log.info("Response code: {}", response.getStatusCode());
             return response.getStatusCode() == 202;
         } catch (IOException e) {
+            // Bubble up to allow higher layers to craft error message
             throw e;
         }
     }

@@ -38,6 +38,12 @@ public class AuthenticationController {
     public ResponseEntity<?> register(@RequestBody RegisterRequest request) throws Exception {
         // register the user
         try {
+            // Debug: Check environment variables
+            String sendgridKey = envVarsService.getVariableWithSource("SENDGRID_API_KEY");
+            String skipEmail = envVarsService.getVariableWithSource("SKIP_EMAIL_SERVICE");
+            log.info("DEBUG - SENDGRID_API_KEY: {}", sendgridKey);
+            log.info("DEBUG - SKIP_EMAIL_SERVICE: {}", skipEmail);
+            
             return ResponseEntity.ok(service.register(request));
         }
 

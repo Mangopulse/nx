@@ -5,6 +5,8 @@ public enum RegistrationMessage {
     CONFIRMATION_LINK_RESENT("A confirmation link has been resent to your email"),
     EMAIL_SEND_ERROR("An error occurred while sending the confirmation email"),
     SENDGRID_NOT_CONFIGURED("SendGrid is not configured"),
+    SENDGRID_KEY_EMPTY("SendGrid API key is empty or missing"),
+    SENDGRID_SEND_FAILED("SendGrid failed to send the email"),
     REGISTRATION_SUCCESSFUL("Registration successful, please check your email"),
     ACCOUNT_UPDATED("Your account information has been updated, please check your email for a new confirmation link");
 

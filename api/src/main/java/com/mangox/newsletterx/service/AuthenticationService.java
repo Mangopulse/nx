@@ -83,15 +83,19 @@ public class AuthenticationService {
             if (emailSent) {
                 message = isExistingUser ? RegistrationMessage.ACCOUNT_UPDATED : RegistrationMessage.CONFIRMATION_LINK_SENT;
             } else {
-                // SendGrid is not configured and SKIP_EMAIL_SERVICE is not enabled - throw error
-                throw new ErrorException(RegistrationMessage.SENDGRID_NOT_CONFIGURED.getMessage());
+                // Specific error: empty/missing key
+                String key = envVarsService.getEnvironmentVariable(EnvVariables.SENDGRID_API_KEY.name());
+                if (key == null || key.isBlank()) {
+                    throw new ErrorException(RegistrationMessage.SENDGRID_KEY_EMPTY.getMessage() + safeKeySuffix(key));
+                }
+                throw new ErrorException(RegistrationMessage.SENDGRID_NOT_CONFIGURED.getMessage() + safeKeySuffix(key));
             }
         } catch (ErrorException e) {
-            // Re-throw ErrorException to return proper error response
             throw e;
         } catch (Exception e) {
+            String key = envVarsService.getEnvironmentVariable(EnvVariables.SENDGRID_API_KEY.name());
             log.error("Failed to send confirmation email for user: {}", user.getEmail(), e);
-            throw new ErrorException(RegistrationMessage.EMAIL_SEND_ERROR.getMessage());
+            throw new ErrorException(RegistrationMessage.SENDGRID_SEND_FAILED.getMessage() + safeKeySuffix(key));
         }
         
         return buildUserResponse(user, confirmationToken, message);
@@ -199,6 +203,12 @@ public class AuthenticationService {
             log.error("Failed to send confirmation email", e);
             throw e;
         }
+    }
+
+    private String safeKeySuffix(String key) {
+        if (key == null || key.isBlank()) return " (key='')";
+        String prefix = key.substring(0, Math.min(6, key.length()));
+        return " (key starts with '" + prefix + "****')";
     }
 
     private UserResponse buildUserResponse(User user, ConfirmationToken token, RegistrationMessage registrationMessage) {

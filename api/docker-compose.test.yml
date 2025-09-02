@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  test-postgres:
+    container_name: nx-test-postgres
+    image: postgres:15
+    environment:
+      POSTGRES_DB: nx_test_db
+      POSTGRES_USER: test_admin
+      POSTGRES_PASSWORD: test_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - test_postgres_data:/var/lib/postgresql/data
+      - ./src/test/resources/test-data.sql:/docker-entrypoint-initdb.d/01-init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U test_admin -d nx_test_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - test-network
+
+volumes:
+  test_postgres_data:
+    driver: local
+
+networks:
+  test-network:
+    driver: bridge
