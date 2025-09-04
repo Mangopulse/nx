@@ -1,0 +1,1 @@
+export const colorWheel = ["#9333ea","#DB2777","#FB7185","#3B82F6","#22D3EE","#166534","#EF4444",""]

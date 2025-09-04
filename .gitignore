@@ -1,0 +1,56 @@
+# === Node (Next.js frontend) ===
+ui/node_modules/
+ui/.next/
+ui/.env
+ui/.env.local
+ui/.env.production
+ui/.eslintcache
+ui/package-lock.json
+
+# === Java (Spring Boot backend) ===
+api/target/
+api/.env
+api/.idea/
+api/*.iml
+api/mvnw
+api/mvnw.cmd
+api/.mvn/
+
+# === Logs ===
+*.log
+*.log.*
+
+# === Docker ===
+**/.dockerignore
+docker-compose.override.yml
+.env
+.env.*
+!.env.example
+
+# === OS Files ===
+.DS_Store
+Thumbs.db
+
+# === Git ===
+.git/
+.gitignore
+
+# === Nginx Config (optional) ===
+/etc/nginx/sites-enabled/newsletterx*
+
+# === Secrets and API Keys ===
+*.key
+*.pem
+*.crt
+*.p12
+
+# === IDEs ===
+.vscode/
+.idea/
+*.swp
+
+# === Backup Files ===
+*~
+*.bak
+*.tmp
+*.old

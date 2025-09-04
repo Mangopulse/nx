@@ -1,0 +1,17 @@
+.draggable-block{
+
+    position: relative;
+
+    .block-drag-handler{
+        position: absolute;
+        top: 50%;
+        right: -20px;
+        transform: translateY(-50%);
+        opacity: 0;
+        transition: .3s;
+    }
+
+    &:hover .block-drag-handler{
+        opacity: 1;   
+    }
+}
