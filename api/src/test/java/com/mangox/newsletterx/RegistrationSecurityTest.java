@@ -11,25 +11,27 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
-@AutoConfigureWebMvc
 @ActiveProfiles("test")
 @Transactional
 @DisplayName("Registration Security Tests")
 public class RegistrationSecurityTest {
 
     @Autowired
+    private WebApplicationContext context;
+    
     private MockMvc mockMvc;
 
     @Autowired
@@ -46,6 +48,8 @@ public class RegistrationSecurityTest {
 
     @BeforeEach
     void setUp() {
+        mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
+        
         confirmationTokenRepository.deleteAll();
         userRepository.deleteAll();
         envVarRepository.deleteAll();

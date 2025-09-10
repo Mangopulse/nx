@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SendGrid Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .container { max-width: 600px; }
+        button { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .result { margin-top: 20px; padding: 15px; border-radius: 4px; }
+        .success { background: #d4edda; border: 1px solid #c3e6cb; color: #155724; }
+        .error { background: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; }
+        input { padding: 8px; margin: 5px 0; width: 300px; border: 1px solid #ccc; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SendGrid Test API</h1>
+        <p>Test the SendGrid configuration and optionally send a test email.</p>
+        
+        <div>
+            <label for="email">Test Email (optional):</label><br>
+            <input type="email" id="email" placeholder="your-email@example.com">
+        </div>
+        
+        <br>
+        <button onclick="testSendGrid()">Test SendGrid Configuration</button>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        async function testSendGrid() {
+            const email = document.getElementById('email').value;
+            const resultDiv = document.getElementById('result');
+            
+            try {
+                let url = 'http://localhost:8080/sender/test-sendgrid';
+                if (email.trim()) {
+                    url += '?toEmail=' + encodeURIComponent(email);
+                }
+                
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                
+                const data = await response.json();
+                
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `
+                    <h3>Success!</h3>
+                    <p><strong>Status:</strong> ${data.status}</p>
+                    <p><strong>Message:</strong> ${data.message}</p>
+                    <p><strong>Configured:</strong> ${data.configured}</p>
+                    ${data.api_key_present !== undefined ? '<p><strong>API Key Present:</strong> ' + data.api_key_present + '</p>' : ''}
+                    ${data.development_mode !== undefined ? '<p><strong>Development Mode:</strong> ' + data.development_mode + '</p>' : ''}
+                    ${data.email_sent !== undefined ? '<p><strong>Email Sent:</strong> ' + data.email_sent + '</p>' : ''}
+                    ${data.to_email !== undefined ? '<p><strong>To Email:</strong> ' + data.to_email + '</p>' : ''}
+                `;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `
+                    <h3>Error!</h3>
+                    <p>${error.message}</p>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

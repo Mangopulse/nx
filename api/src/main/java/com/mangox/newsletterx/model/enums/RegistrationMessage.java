@@ -8,7 +8,9 @@ public enum RegistrationMessage {
     SENDGRID_KEY_EMPTY("SendGrid API key is empty or missing"),
     SENDGRID_SEND_FAILED("SendGrid failed to send the email"),
     REGISTRATION_SUCCESSFUL("Registration successful, please check your email"),
-    ACCOUNT_UPDATED("Your account information has been updated, please check your email for a new confirmation link");
+    ACCOUNT_UPDATED("Your account information has been updated, please check your email for a new confirmation link"),
+    EMAIL_ALREADY_TAKEN("This email address is already registered and verified"),
+    WEBSITE_ALREADY_TAKEN("This website is already registered and verified");
 
     private final String message;
 
