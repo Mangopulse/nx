@@ -13,6 +13,16 @@ RUN npm ci
 # Copy the rest of your app
 COPY . .
 
+# Accept build-time arguments for Next.js public environment variables
+ARG NEXT_PUBLIC_API
+ARG NEXT_PUBLIC_BACKEND_URL
+ARG NEXT_PUBLIC_IS_LOCAL
+
+# Set environment variables for the build
+ENV NEXT_PUBLIC_API=$NEXT_PUBLIC_API
+ENV NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL
+ENV NEXT_PUBLIC_IS_LOCAL=$NEXT_PUBLIC_IS_LOCAL
+
 # Build the application
 RUN npm run build
 
